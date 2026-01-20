@@ -1419,6 +1419,12 @@ body:is(.dark *) {
   color: transparent;
 }
 
+/* Reusable gradient backgrounds */
+
+/* Text utilities */
+
+/* Link utilities */
+
 .static {
   position: static;
 }

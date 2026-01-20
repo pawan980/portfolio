@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# exit on error
+set -o errexit
+
+pip install -r requirements/prod.txt
+npm install
+npm run build:css
+
+python manage.py collectstatic --no-input
+python manage.py migrate
