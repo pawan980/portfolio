@@ -1,0 +1,8 @@
+<c-vars
+    hover="{{ hover|default:'true' }}"
+/>
+
+<div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transition-all duration-200
+            {% if hover == 'true' %}hover:shadow-xl hover:-translate-y-1{% endif %}">
+    {{ slot }}
+</div>

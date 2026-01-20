@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" :class="{ 'dark': darkMode }"
+    x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}{{ site.full_name }} - {{ site.tagline }}{% endblock %}</title>
+
+    <!-- SEO -->
+    <meta name="description" content="{% block meta_description %}{{ site.meta_description }}{% endblock %}">
+    <meta name="keywords" content="{{ site.meta_keywords }}">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="{% static 'css/output.css' %}?v={{ site.updated_at|date:'U' }}">
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+
+    <!-- Devicon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+</head>
+
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <c-navbar></c-navbar>
+
+    <!-- Main Content -->
+    <main class="min-h-screen">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <c-footer></c-footer>
+
+    <!-- Scroll to Top -->
+    <div x-data="{ show: false }" @scroll.window="show = window.pageYOffset > 300" x-show="show" x-transition
+        class="fixed bottom-8 right-8 z-50">
+        <button @click="window.scrollTo({ top: 0, behavior: 'smooth' })"
+            class="bg-primary-600 hover:bg-primary-700 text-white p-3 rounded-full shadow-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+        </button>
+    </div>
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+
+</html>
