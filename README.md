@@ -1,19 +1,5 @@
 # Django Portfolio Website
-
-A modern, responsive portfolio website built with Django, Django Cotton, Alpine.js, and Tailwind CSS.
-
-## ✨ Features
-
-- 🎨 Modern, responsive design with dark mode
-- 📱 Mobile-first approach
-- ⚡ Component-based architecture with Django Cotton
-- 🎯 SEO optimized
-- 📊 Admin panel for easy content management
-- 💼 Project showcase with detailed pages
-- 📝 Contact form with email notifications
-- 🎓 Education & certification sections
-- 💪 Skills with proficiency levels
-- 🏢 Work experience timeline
+A digital showcase of my work and professional journey.
 
 ## 🚀 Tech Stack
 
