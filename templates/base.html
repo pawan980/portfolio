@@ -7,11 +7,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %}{{ site.full_name }} - {{ site.tagline }}{% endblock %}</title>
+    <title>{% block title %}{% if site %}{{ site.full_name }} - {{ site.tagline }}{% else %}Portfolio{% endif %}{% endblock %}</title>
 
     <!-- SEO -->
-    <meta name="description" content="{% block meta_description %}{{ site.meta_description }}{% endblock %}">
-    <meta name="keywords" content="{{ site.meta_keywords }}">
+    <meta name="description" content="{% block meta_description %}{% if site %}{{ site.meta_description }}{% endif %}{% endblock %}">
+    <meta name="keywords" content="{% if site %}{{ site.meta_keywords }}{% endif %}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
