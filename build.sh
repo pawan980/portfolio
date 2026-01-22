@@ -15,6 +15,6 @@ echo "Collecting static files..."
 python manage.py collectstatic --no-input
 
 echo "Running migrations..."
-python manage.py migrate --noinput
+python manage.py migrate --no-input
 
 echo "Build completed successfully!"
