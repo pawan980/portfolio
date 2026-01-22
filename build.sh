@@ -15,6 +15,7 @@ echo "Collecting static files..."
 python manage.py collectstatic --no-input
 
 echo "Running migrations..."
+python manage.py makemigrations --noinput
 python manage.py migrate --run-syncdb
 
 echo "Build completed successfully!"
