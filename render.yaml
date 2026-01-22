@@ -3,7 +3,7 @@ services:
     name: portfolio
     env: python
     buildCommand: "./build.sh"
-    startCommand: "gunicorn config.wsgi:application"
+    startCommand: "python manage.py migrate --no-input && python manage.py create_default_superuser && gunicorn config.wsgi:application"
     envVars:
       - key: DJANGO_ENV
         value: prod

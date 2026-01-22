@@ -13,7 +13,7 @@ DATABASES = {
 }
 
 # Security settings
-DEBUG = True
+DEBUG = False
 
 # Allowed hosts - ensure Render domain is included
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['portfolio-xj33.onrender.com'])
