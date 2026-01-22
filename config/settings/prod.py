@@ -18,7 +18,8 @@ DEBUG = False
 # Allowed hosts - ensure Render domain is included
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['portfolio-xj33.onrender.com'])
 
-SECURE_SSL_REDIRECT = env.bool('SECURE_SSL_REDIRECT', default=True)
+# Disable SSL redirect temporarily to debug
+SECURE_SSL_REDIRECT = False  # Changed from env.bool to False for debugging
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_HSTS_SECONDS = 31536000
