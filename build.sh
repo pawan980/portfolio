@@ -21,17 +21,7 @@ python manage.py migrate --no-input --verbosity 2 || {
     python manage.py migrate --no-input --verbosity 2
 }
 
-echo "Creating superuser..."
-python manage.py shell <<'EOF'
-from django.contrib.auth.models import User
-try:
-    if not User.objects.filter(username='admin').exists():
-        User.objects.create_superuser('admin', 'admin@example.com', 'admin123')
-        print("✓ Superuser 'admin' created successfully")
-    else:
-        print("✓ Superuser already exists")
-except Exception as e:
-    print(f"Error creating superuser: {e}")
-EOF
+echo "Creating default superuser..."
+python manage.py create_default_superuser
 
 echo "Build completed successfully!"
