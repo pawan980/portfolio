@@ -23,8 +23,8 @@
             <c-card hover="false">
                 <h2 class="text-2xl font-bold mb-6">Send Me a Message</h2>
 
-                <!-- Formspree form - no backend needed -->
-                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-4">
+                <!-- FormCarry form - no backend needed -->
+                <form action="https://formcarry.com/s/YOUR_FORM_ID" method="POST" accept-charset="UTF-8" class="space-y-4">
                     <!-- Name -->
                     <div>
                         <label for="name" class="block text-sm font-medium mb-2">
@@ -78,6 +78,9 @@
                         <textarea id="message" name="message" rows="5" required
                             class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 dark:bg-gray-800"></textarea>
                     </div>
+
+                    <!-- Hidden input for spam protection -->
+                    <input type="hidden" name="_gotcha">
 
                     <!-- Submit Button -->
                     <button type="submit" class="w-full btn-primary">
