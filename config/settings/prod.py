@@ -14,7 +14,8 @@ DATABASES = {
 }
 
 # Security settings
-DEBUG = False 
+DEBUG = False
+TEMPLATE_DEBUG = False 
 
 # Allowed hosts - ensure Render domain is included
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['portfolio-xj33.onrender.com'])
@@ -23,7 +24,11 @@ ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['portfolio-xj33.onrender.com'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = env.bool('SECURE_SSL_REDIRECT', default=True)
 SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Lax'
 CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SAMESITE = 'Lax'
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
