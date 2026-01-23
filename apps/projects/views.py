@@ -15,11 +15,10 @@ class ProjectListView(ListView):
     paginate_by = 12
     
     def _table_exists(self, table_name):
-        """Check if a database table exists."""
+        """Check if a database table exists using Django introspection."""
         try:
-            with connection.cursor() as cursor:
-                cursor.execute(f"SELECT 1 FROM {table_name} LIMIT 1")
-            return True
+            table_names = connection.introspection.table_names()
+            return table_name in table_names
         except Exception:
             return False
     

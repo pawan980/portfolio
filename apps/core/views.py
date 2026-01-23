@@ -15,11 +15,10 @@ class HomeView(TemplateView):
     template_name = 'pages/home.html'
     
     def _table_exists(self, table_name):
-        """Check if a database table exists."""
+        """Check if a database table exists using Django introspection."""
         try:
-            with connection.cursor() as cursor:
-                cursor.execute(f"SELECT 1 FROM {table_name} LIMIT 1")
-            return True
+            table_names = connection.introspection.table_names()
+            return table_name in table_names
         except Exception:
             return False
     
@@ -77,3 +76,15 @@ class HomeView(TemplateView):
             context['certifications'] = []
         
         return context
+
+
+def custom_404(request, exception):
+    """Custom 404 error handler."""
+    from django.shortcuts import render
+    return render(request, '404.html', status=404)
+
+
+def custom_500(request):
+    """Custom 500 error handler."""
+    from django.shortcuts import render
+    return render(request, '500.html', status=500)
