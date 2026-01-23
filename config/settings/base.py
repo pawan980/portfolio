@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     
     # Third-party apps
     'django_cotton',
+    'storages',
     
     # Local apps
     'apps.core',
