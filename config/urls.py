@@ -17,9 +17,10 @@ urlpatterns = [
 # Serve media files in development
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 # Custom error handlers
 handler404 = 'apps.core.views.custom_404'
-handler500 = 'apps.core.views.custom_500'    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+handler500 = 'apps.core.views.custom_500'
 
 # Customize admin
 admin.site.site_header = "Portfolio Admin"
