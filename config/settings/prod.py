@@ -15,7 +15,7 @@ DATABASES = {
 }
 
 # Security settings
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = False 
 
 # Allowed hosts - ensure Render domain is included
