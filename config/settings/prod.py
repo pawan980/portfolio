@@ -68,9 +68,6 @@ LOGGING = {
     },
 }
 
-# Email backend using SendGrid (secure API key instead of password)
-EMAIL_BACKEND = 'anymail.backends.sendgrid.EmailBackend'
-ANYMAIL = {
-    'SENDGRID_API_KEY': env('SENDGRID_API_KEY', default=''),
-}
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@example.com')
+# Email backend - console logging (contact submissions saved to database)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@portfolio-xj33.onrender.com')
