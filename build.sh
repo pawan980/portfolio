@@ -14,10 +14,4 @@ npm run build:css
 echo "Collecting static files..."
 python manage.py collectstatic --no-input
 
-echo "Running migrations..."
-python manage.py migrate --no-input --verbosity 3
-
-echo "Creating default superuser..."
-python manage.py create_default_superuser
-
 echo "Build completed successfully!"
