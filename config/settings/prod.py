@@ -93,12 +93,12 @@ if USE_S3:
         AWS_DEFAULT_ACL = None  # Don't set ACLs (use bucket policy instead)
         AWS_QUERYSTRING_AUTH = False  # Don't use signed URLs
         AWS_S3_FILE_OVERWRITE = False
-        AWS_LOCATION = 'media'
+        AWS_LOCATION = ''  # Files at bucket root
         AWS_S3_SIGNATURE_VERSION = 's3v4'
         
         # Media files configuration
         DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-        MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+        MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
     else:
         # Fall back to local storage if S3 credentials missing
         MEDIA_URL = '/media/'
