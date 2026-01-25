@@ -85,13 +85,13 @@ if USE_S3:
     
     # Only configure S3 if credentials are provided
     if AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and AWS_STORAGE_BUCKET_NAME:
-        # S3 settings - keep bucket private, use querystring auth
+        # S3 settings - public bucket
         AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
         AWS_S3_OBJECT_PARAMETERS = {
             'CacheControl': 'max-age=86400',
         }
-        AWS_DEFAULT_ACL = None  # Use bucket's default (private)
-        AWS_QUERYSTRING_AUTH = True  # Generate signed URLs
+        AWS_DEFAULT_ACL = 'public-read'  # Make files publicly accessible
+        AWS_QUERYSTRING_AUTH = False  # Don't use signed URLs
         AWS_S3_FILE_OVERWRITE = False
         AWS_LOCATION = 'media'
         AWS_S3_SIGNATURE_VERSION = 's3v4'
