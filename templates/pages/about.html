@@ -18,15 +18,10 @@
             <span class="inline-block">{{ site.tagline }}</span>
         </p>
 
+
         <!-- Engaging Bio with Line Breaks -->
-        <div class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8 space-y-4 leading-relaxed">
-            {% with bio_parts=site.bio|split:"." %}
-            {% for part in bio_parts %}
-            {% if part|length > 10 %}
-            <p>{{ part|trim }}.</p>
-            {% endif %}
-            {% endfor %}
-            {% endwith %}
+        <div class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8 leading-relaxed">
+            {{ site.bio|linebreaks }}
         </div>
 
         <div class="flex flex-wrap gap-4 justify-center">
