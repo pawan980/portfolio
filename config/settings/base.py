@@ -51,6 +51,9 @@ INSTALLED_APPS = [
     'apps.experience',
     'apps.education',
     'apps.contact',
+    'apps.testimonials',
+    'apps.blog',
+    'apps.analytics',
 ]
 
 MIDDLEWARE = [

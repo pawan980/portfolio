@@ -11,7 +11,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.core.urls')),
     path('projects/', include('apps.projects.urls')),
+    path('blog/', include('apps.blog.urls')),
     path('contact/', include('apps.contact.urls')),
+    path('analytics/', include('apps.analytics.urls')),
 ]
 
 # Serve media files in development

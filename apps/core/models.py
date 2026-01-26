@@ -42,6 +42,12 @@ class SiteSettings(TimeStampedModel):
     # Resume
     resume_file = models.FileField(upload_to='resume/', blank=True, null=True)
     
+    # Stats/Achievements
+    years_experience = models.IntegerField(default=0, help_text="Years of professional experience")
+    projects_completed = models.IntegerField(default=0, help_text="Number of projects completed")
+    clients_served = models.IntegerField(default=0, help_text="Number of clients served")
+    certifications = models.IntegerField(default=0, help_text="Number of certifications obtained")
+    
     # SEO
     meta_description = models.CharField(max_length=160, blank=True)
     meta_keywords = models.CharField(max_length=255, blank=True)

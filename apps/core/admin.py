@@ -17,6 +17,10 @@ class SiteSettingsAdmin(admin.ModelAdmin):
         ('Resume', {
             'fields': ('resume_file',)
         }),
+        ('Stats & Achievements', {
+            'fields': ('years_experience', 'projects_completed', 'clients_served', 'certifications'),
+            'description': 'Key metrics displayed on homepage'
+        }),
         ('SEO', {
             'fields': ('meta_description', 'meta_keywords')
         }),

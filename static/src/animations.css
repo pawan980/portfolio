@@ -1,0 +1,99 @@
+/* Scroll Animation Utilities */
+
+/* Base animation classes */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Fade in from left */
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-left.animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Fade in from right */
+.fade-in-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-right.animated {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Scale up animation */
+.scale-in {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scale-in.animated {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Stagger animation delays for child elements */
+.stagger-animation>* {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.stagger-animation.animated>*:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.stagger-animation.animated>*:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.stagger-animation.animated>*:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.stagger-animation.animated>*:nth-child(4) {
+    transition-delay: 0.4s;
+}
+
+.stagger-animation.animated>*:nth-child(5) {
+    transition-delay: 0.5s;
+}
+
+.stagger-animation.animated>*:nth-child(6) {
+    transition-delay: 0.6s;
+}
+
+.stagger-animation.animated>* {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    .animate-on-scroll,
+    .fade-in-left,
+    .fade-in-right,
+    .scale-in,
+    .stagger-animation>* {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}

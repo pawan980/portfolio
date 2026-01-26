@@ -1,0 +1,17 @@
+{% comment %}
+Lazy Loading Image Component
+Usage: <c-lazy-image src="/path/to/image.jpg" alt="Description" />
+Optional: class, width, height, eager (for above-fold images)
+{% endcomment %}
+
+<c-vars src alt class="" width="" height="" eager="false" />
+
+{% if eager == "true" %}
+{# Above-the-fold images - load immediately #}
+<img src="{{ src }}" alt="{{ alt }}" {% if class %}class="{{ class }}" {% endif %} {% if width %}width="{{ width }}" {%
+    endif %} {% if height %}height="{{ height }}" {% endif %}>
+{% else %}
+{# Below-the-fold images - lazy load #}
+<img src="{{ src }}" alt="{{ alt }}" loading="lazy" {% if class %}class="{{ class }}" {% endif %} {% if width
+    %}width="{{ width }}" {% endif %} {% if height %}height="{{ height }}" {% endif %}>
+{% endif %}

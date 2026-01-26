@@ -67,6 +67,22 @@ class HomeView(TemplateView):
                 ).order_by('-date_obtained')[:6]
             else:
                 context['certifications'] = []
+            
+            # Testimonials
+            if self._table_exists('testimonials_testimonial'):
+                from apps.testimonials.models import Testimonial
+                context['testimonials'] = Testimonial.objects.filter(is_featured=True)[:3]
+            else:
+                context['testimonials'] = []
+            
+            # Blog posts
+            if self._table_exists('blog_blogpost'):
+                from apps.blog.models import BlogPost
+                context['blog_posts'] = BlogPost.objects.filter(
+                    is_published=True, is_featured=True
+                ).order_by('-published_date')[:3]
+            else:
+                context['blog_posts'] = []
         except Exception:
             # If anything fails, return empty collections
             context['skills_by_category'] = {}
@@ -74,6 +90,8 @@ class HomeView(TemplateView):
             context['experiences'] = []
             context['education'] = []
             context['certifications'] = []
+            context['testimonials'] = []
+            context['blog_posts'] = []
         
         return context
 
