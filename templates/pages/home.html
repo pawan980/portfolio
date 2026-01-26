@@ -443,7 +443,9 @@
     }
 
     function downloadResume() {
+        {% if site.resume_file %}
         window.location.href = "{{ site.resume_file.url }}";
+        {% endif %}
     }
 </script>
 
