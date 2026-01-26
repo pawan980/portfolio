@@ -7,7 +7,7 @@
     <div class="text-center px-4">
         {% if site.profile_image %}
         <c-lazy-image src="{{ site.profile_image.url }}" alt="{{ site.full_name }}"
-            class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white dark:border-gray-700 shadow-xl"
+            class="w-40 h-40 rounded-full mx-auto mb-6 border-4 border-white dark:border-gray-700 shadow-xl"
             eager="true" />
         {% endif %}
 
@@ -19,8 +19,8 @@
             {{ site.tagline }}
         </p>
 
-        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
-            {{ site.bio|truncatewords:30 }}
+        <p class="text-lg text-gray-600 dark:text-gray-400 max-w-4xl mx-auto mb-8">
+            {{ site.bio }}
         </p>
 
         <div class="flex flex-wrap gap-4 justify-center">
