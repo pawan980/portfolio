@@ -5,13 +5,17 @@
 
             <!-- Logo -->
             <div class="flex-shrink-0">
-                <a href="{% url 'core:home' %}" class="text-2xl font-bold text-gradient">
+                <a href="{% url 'core:about' %}" class="text-2xl font-bold text-gradient">
                     {{ site.full_name }}
                 </a>
             </div>
 
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center space-x-8">
+                <a href="{% url 'core:landing' %}"
+                    class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                    Home
+                </a>
                 <a href="{% url 'projects:list' %}"
                     class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                     Projects
@@ -84,6 +88,7 @@
     <div x-show="open" x-transition @click.away="open = false"
         class="md:hidden border-t border-gray-200 dark:border-gray-800">
         <div class="px-4 py-3 space-y-3">
+            <a href="{% url 'core:landing' %}" class="block py-2 text-gray-700 dark:text-gray-300">Home</a>
             <a href="{% url 'projects:list' %}" class="block py-2 text-gray-700 dark:text-gray-300">Projects</a>
             <a href="{% url 'blog:list' %}" class="block py-2 text-gray-700 dark:text-gray-300">Blog</a>
             {% if site.resume_file %}
