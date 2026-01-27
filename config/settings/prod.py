@@ -20,12 +20,14 @@ TEMPLATE_DEBUG = False
 
 # Allowed hosts - ensure Render domain is included
 ALLOWED_HOSTS = [
+    'portfolio-xj33.onrender.com',  # Old Render URL
     'pawan980.onrender.com',
     'pawan980.live',
     'www.pawan980.live',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
+    'https://portfolio-xj33.onrender.com',
     'https://pawan980.onrender.com',
     'https://pawan980.live',
     'https://www.pawan980.live',
