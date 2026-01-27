@@ -3,13 +3,12 @@
 {% block content %}
 
 <!-- Hero Section -->
-<section class="min-h-screen flex items-center justify-center header-gradient pt-16">
+<section class="min-h-screen flex items-center justify-center header-gradient pt-24 md:pt-28 lg:pt-32">
     <div class="text-center px-4">
         {% if site.profile_image %}
         <c-lazy-image src="{{ site.profile_image.url }}" alt="{{ site.full_name }}"
-            class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white dark:border-gray-700 shadow-xl object-cover"
-            style="image-orientation: from-image;"
-            eager="true" />
+            class="w-48 h-48 md:w-64 md:h-64 rounded-full mx-auto mb-6 border-4 border-white dark:border-gray-700 shadow-xl object-cover"
+            style="image-orientation: from-image;" eager="true" />
         {% endif %}
 
         <h1 class="text-5xl md:text-6xl font-bold mb-4 text-gradient">
@@ -181,7 +180,8 @@
             <p class="text-primary-600 dark:text-primary-400 font-medium mb-2">{{ edu.field_of_study }}</p>
             <p class="text-gray-600 dark:text-gray-400 mb-2">{{ edu.institution }}</p>
             <p class="text-sm text-gray-500 dark:text-gray-500 mb-3">
-                {{ edu.start_date|date:"Y" }} - {% if edu.is_current %}Present{% else %}{{ edu.end_date|date:"Y" }}{% endif %}
+                {{ edu.start_date|date:"Y" }} - {% if edu.is_current %}Present{% else %}{{ edu.end_date|date:"Y" }}{%
+                endif %}
             </p>
             {% if edu.grade %}
             <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Grade: {{ edu.grade }}</p>
@@ -191,7 +191,8 @@
                 class="text-sm text-primary-600 hover:text-primary-700 font-medium inline-flex items-center">
                 Visit Institution
                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
             </a>
             {% endif %}
@@ -215,9 +216,10 @@
             {% if cert.credential_url %}
             <a href="{{ cert.credential_url }}" target="_blank"
                 class="text-sm text-primary-600 hover:text-primary-700 font-medium inline-flex items-center">
-                View Credential 
+                View Credential
                 <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
             </a>
             {% endif %}
