@@ -61,19 +61,6 @@
 </c-section>
 {% endif %}
 
-<!-- Currently Learning Section -->
-{% if site.currently_learning %}
-<c-section title="Currently Learning" subtitle="Expanding my skillset">
-    <div class="max-w-4xl mx-auto">
-        <c-card>
-            <div class="prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
-                {{ site.currently_learning|linebreaks }}
-            </div>
-        </c-card>
-    </div>
-</c-section>
-{% endif %}
-
 <!-- My Philosophy Section -->
 {% if site.my_philosophy %}
 <c-section title="My Philosophy" subtitle="How I approach my work">
@@ -282,29 +269,6 @@
             </div>
         </c-card>
         {% endfor %}
-    </div>
-
-    <!-- Currently Learning Subsection -->
-    <div class="mt-12">
-        <h3 class="text-2xl font-bold text-center mb-8 text-primary-600 dark:text-primary-400">Currently Learning</h3>
-        <div class="flex flex-wrap justify-center gap-4">
-            <div
-                class="px-6 py-3 bg-gradient-to-r from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900 rounded-lg border-2 border-primary-200 dark:border-primary-800">
-                <span class="font-medium text-primary-700 dark:text-primary-300">🚀 Advanced Python Patterns</span>
-            </div>
-            <div
-                class="px-6 py-3 bg-gradient-to-r from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900 rounded-lg border-2 border-primary-200 dark:border-primary-800">
-                <span class="font-medium text-primary-700 dark:text-primary-300">☁️ AWS Solutions Architect</span>
-            </div>
-            <div
-                class="px-6 py-3 bg-gradient-to-r from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900 rounded-lg border-2 border-primary-200 dark:border-primary-800">
-                <span class="font-medium text-primary-700 dark:text-primary-300">🎨 System Design</span>
-            </div>
-            <div
-                class="px-6 py-3 bg-gradient-to-r from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900 rounded-lg border-2 border-primary-200 dark:border-primary-800">
-                <span class="font-medium text-primary-700 dark:text-primary-300">⚡ Performance Optimization</span>
-            </div>
-        </div>
     </div>
 </c-section>
 

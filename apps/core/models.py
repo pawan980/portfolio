@@ -44,7 +44,6 @@ class SiteSettings(TimeStampedModel):
     
     # Content Sections
     what_i_do = models.TextField(blank=True, help_text="What I Do section")
-    currently_learning = models.TextField(blank=True, help_text="Currently Learning section")
     my_philosophy = models.TextField(blank=True, help_text="My Philosophy section")
     beyond_coding = models.TextField(blank=True, help_text="Beyond Coding/Interests section")
     
