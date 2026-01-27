@@ -381,8 +381,8 @@
             <p class="text-primary-600 dark:text-primary-400 font-medium mb-2">{{ edu.field_of_study }}</p>
             <p class="text-gray-600 dark:text-gray-400 mb-2">{{ edu.institution }}</p>
             <p class="text-sm text-gray-500 dark:text-gray-500 mb-3">
-                {{ edu.start_date|date:"Y" }} - {% if edu.is_current %}Present{% else %}{{ edu.end_date|date:"Y" }}{%
-                endif %}
+                {{ edu.start_date|date:"Y" }} - {% if edu.is_current %}Present{% else %}{{ edu.end_date|date:"Y" }}
+                {% endif %}
             </p>
             {% if edu.grade %}
             <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Grade: {{ edu.grade }}</p>
