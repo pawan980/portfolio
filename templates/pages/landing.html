@@ -74,28 +74,37 @@
     </div>
 </section>
 
-<!-- Quick Stats -->
-<c-section title="At a Glance" subtitle="Key metrics that define my journey" class="animate-on-scroll">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
-            <div class="text-4xl font-bold text-primary-600 dark:text-primary-400 mb-2">{{ stats.projects }}</div>
-            <div class="text-gray-600 dark:text-gray-400">Projects</div>
-        </div>
-        <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
-            <div class="text-4xl font-bold text-primary-600 dark:text-primary-400 mb-2">{{ stats.experience_years }}+
+<!-- Skills Overview -->
+{% if top_skills_by_category %}
+<c-section title="Skills & Technology" subtitle="Top expertise areas" class="animate-on-scroll">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 stagger-animation">
+        {% for category, skills in top_skills_by_category.items %}
+        <c-card>
+            <h3 class="text-xl font-bold mb-4 text-primary-600 dark:text-primary-400">{{ category }}</h3>
+            <div class="space-y-3">
+                {% for skill in skills %}
+                <div>
+                    <div class="flex justify-between mb-1">
+                        <span class="text-sm font-medium">{{ skill.name }}</span>
+                        <span class="text-sm text-gray-500">{{ skill.proficiency }}%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div class="bg-primary-600 h-2 rounded-full" style="width: {{ skill.proficiency }}%"></div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-            <div class="text-gray-600 dark:text-gray-400">Years Experience</div>
-        </div>
-        <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
-            <div class="text-4xl font-bold text-primary-600 dark:text-primary-400 mb-2">{{ stats.skills }}</div>
-            <div class="text-gray-600 dark:text-gray-400">Technologies</div>
-        </div>
-        <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
-            <div class="text-4xl font-bold text-primary-600 dark:text-primary-400 mb-2">{{ stats.certifications }}</div>
-            <div class="text-gray-600 dark:text-gray-400">Certifications</div>
-        </div>
+        </c-card>
+        {% endfor %}
+    </div>
+
+    <div class="text-center mt-8">
+        <a href="{% url 'core:about' %}#skills" class="text-primary-600 hover:text-primary-700 font-medium">
+            See All Skills →
+        </a>
     </div>
 </c-section>
+{% endif %}
 
 <!-- Featured Projects -->
 {% if featured_projects %}
@@ -150,69 +159,47 @@
 </c-section>
 {% endif %}
 
-<!-- Skills Overview -->
-{% if top_skills_by_category %}
-<c-section title="Skills & Technologies" subtitle="Top expertise areas" class="animate-on-scroll">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 stagger-animation">
-        {% for category, skills in top_skills_by_category.items %}
+<!-- Certifications Section -->
+{% if featured_certifications %}
+<c-section title="Certifications" subtitle="Professional credentials" class="animate-on-scroll">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 stagger-animation">
+        {% for cert in featured_certifications %}
         <c-card>
-            <h3 class="text-xl font-bold mb-4 text-primary-600 dark:text-primary-400">{{ category }}</h3>
-            <div class="space-y-3">
-                {% for skill in skills|slice:":5" %}
-                <div>
-                    <div class="flex justify-between mb-1">
-                        <span class="text-sm font-medium">{{ skill.name }}</span>
-                        <span class="text-sm text-gray-500">{{ skill.proficiency }}%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                        <div class="bg-primary-600 h-2 rounded-full" style="width: {{ skill.proficiency }}%"></div>
-                    </div>
+            <div class="text-center">
+                <!-- Badge/Logo if available -->
+                {% if cert.badge_image %}
+                <img src="{{ cert.badge_image.url }}" alt="{{ cert.name }}"
+                    class="w-20 h-20 mx-auto mb-4 object-contain">
+                {% else %}
+                <div
+                    class="w-20 h-20 mx-auto mb-4 bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900 rounded-full flex items-center justify-center">
+                    <svg class="w-10 h-10 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z">
+                        </path>
+                    </svg>
                 </div>
-                {% endfor %}
+                {% endif %}
+
+                <h3 class="font-bold mb-2 text-sm">{{ cert.name }}</h3>
+                <p class="text-xs text-gray-600 dark:text-gray-400 mb-1">{{ cert.issuing_organization }}</p>
+                <p class="text-xs text-gray-500 dark:text-gray-500">{{ cert.date_obtained|date:"M Y" }}</p>
+
+                {% if cert.credential_url %}
+                <a href="{{ cert.credential_url }}" target="_blank"
+                    class="text-xs text-primary-600 hover:text-primary-700 mt-3 inline-block font-medium">
+                    Verify →
+                </a>
+                {% endif %}
             </div>
         </c-card>
         {% endfor %}
     </div>
 
     <div class="text-center mt-8">
-        <a href="{% url 'core:about' %}#skills" class="text-primary-600 hover:text-primary-700 font-medium">
-            See All Skills →
-        </a>
-    </div>
-</c-section>
-{% endif %}
-
-<!-- Recent Experience -->
-{% if recent_experiences %}
-<c-section title="Recent Experience" subtitle="Latest positions" class="animate-on-scroll">
-    <div class="max-w-4xl mx-auto space-y-8">
-        {% for exp in recent_experiences %}
-        <div class="flex gap-6 stagger-animation">
-            <div
-                class="flex-shrink-0 w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
-                <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                    </path>
-                </svg>
-            </div>
-            <div class="flex-1">
-                <h3 class="text-xl font-bold">{{ exp.position }}</h3>
-                <p class="text-primary-600 dark:text-primary-400 mb-2">{{ exp.company }}</p>
-                <p class="text-sm text-gray-500 mb-3">
-                    {{ exp.start_date|date:"M Y" }} - {% if exp.end_date %}{{ exp.end_date|date:"M Y" }}{% else
-                    %}Present{% endif %}
-                </p>
-                <p class="text-gray-600 dark:text-gray-400">{{ exp.description|truncatewords:30 }}</p>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-
-    <div class="text-center mt-8">
-        <a href="{% url 'core:about' %}#experience" class="text-primary-600 hover:text-primary-700 font-medium">
-            View Full Experience →
+        <a href="{% url 'core:about' %}#certifications" class="text-primary-600 hover:text-primary-700 font-medium">
+            View All Certifications →
         </a>
     </div>
 </c-section>

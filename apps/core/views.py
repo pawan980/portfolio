@@ -26,7 +26,7 @@ class LandingView(TemplateView):
         context = super().get_context_data(**kwargs)
         
         try:
-            # Featured projects (top 3-4)
+            # Featured projects (top 4)
             if self._table_exists('projects_project'):
                 context['featured_projects'] = Project.objects.filter(
                     is_published=True, is_featured=True
@@ -34,7 +34,7 @@ class LandingView(TemplateView):
             else:
                 context['featured_projects'] = []
             
-            # Top skills (12-15 most important)
+            # Top skills by category (3-4 categories, up to 5 skills each)
             if self._table_exists('core_skill'):
                 skills = Skill.objects.filter(is_active=True).order_by('-proficiency')[:15]
                 context['top_skills_by_category'] = {}
@@ -42,30 +42,26 @@ class LandingView(TemplateView):
                     category = skill.get_category_display()
                     if category not in context['top_skills_by_category']:
                         context['top_skills_by_category'][category] = []
-                    context['top_skills_by_category'][category].append(skill)
+                    if len(context['top_skills_by_category'][category]) < 5:
+                        context['top_skills_by_category'][category].append(skill)
+                    # Limit to 4 categories max
+                    if len(context['top_skills_by_category']) >= 4:
+                        break
             else:
                 context['top_skills_by_category'] = {}
             
-            # Recent experience (2-3 latest)
-            if self._table_exists('experience_experience'):
-                context['recent_experiences'] = Experience.objects.filter(
+            # Featured certifications (top 4)
+            if self._table_exists('education_certification'):
+                context['featured_certifications'] = Certification.objects.filter(
                     is_visible=True
-                ).order_by('-start_date')[:3]
+                ).order_by('-date_obtained')[:4]
             else:
-                context['recent_experiences'] = []
-            
-            # Quick stats
-            context['stats'] = {
-                'projects': Project.objects.filter(is_published=True).count() if self._table_exists('projects_project') else 0,
-                'experience_years': self._calculate_experience_years(),
-                'skills': Skill.objects.filter(is_active=True).count() if self._table_exists('core_skill') else 0,
-                'certifications': Certification.objects.filter(is_visible=True).count() if self._table_exists('education_certification') else 0,
-            }
+                context['featured_certifications'] = []
+                
         except Exception:
             context['featured_projects'] = []
             context['top_skills_by_category'] = {}
-            context['recent_experiences'] = []
-            context['stats'] = {'projects': 0, 'experience_years': 0, 'skills': 0, 'certifications': 0}
+            context['featured_certifications'] = []
         
         return context
     
