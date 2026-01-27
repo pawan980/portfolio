@@ -46,6 +46,8 @@ class SiteSettings(TimeStampedModel):
     what_i_do = models.TextField(blank=True, help_text="What I Do section")
     my_philosophy = models.TextField(blank=True, help_text="My Philosophy section")
     beyond_coding = models.TextField(blank=True, help_text="Beyond Coding/Interests section")
+    current_projects = models.TextField(blank=True, help_text="Currently - Current Projects subsection")
+    currently_learning = models.TextField(blank=True, help_text="Currently - Learning subsection")
     
     # Stats/Achievements
     years_experience = models.IntegerField(default=0, help_text="Years of professional experience")
