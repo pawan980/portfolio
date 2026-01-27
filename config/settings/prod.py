@@ -19,7 +19,17 @@ DEBUG = True
 TEMPLATE_DEBUG = False 
 
 # Allowed hosts - ensure Render domain is included
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['portfolio-xj33.onrender.com'])
+ALLOWED_HOSTS = [
+    'pawan980.onrender.com',
+    'pawan980.live',
+    'www.pawan980.live',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://pawan980.onrender.com',
+    'https://pawan980.live',
+    'https://www.pawan980.live',
+]
 
 # Security middleware settings
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
