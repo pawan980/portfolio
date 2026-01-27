@@ -17,6 +17,10 @@ class SiteSettingsAdmin(admin.ModelAdmin):
         ('Resume', {
             'fields': ('resume_file',)
         }),
+        ('Content Sections', {
+            'fields': ('what_i_do', 'currently_learning', 'my_philosophy', 'beyond_coding'),
+            'description': 'Editable sections for About page'
+        }),
         ('Stats & Achievements', {
             'fields': ('years_experience', 'projects_completed', 'clients_served', 'certifications'),
             'description': 'Key metrics displayed on homepage'
