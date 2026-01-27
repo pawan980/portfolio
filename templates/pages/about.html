@@ -48,45 +48,6 @@
     </div>
 </section>
 
-<!-- What I Do Section -->
-{% if site.what_i_do %}
-<c-section title="What I Do" subtitle="My professional focus">
-    <div class="max-w-4xl mx-auto">
-        <c-card>
-            <div class="prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
-                {{ site.what_i_do|linebreaks }}
-            </div>
-        </c-card>
-    </div>
-</c-section>
-{% endif %}
-
-<!-- My Philosophy Section -->
-{% if site.my_philosophy %}
-<c-section title="My Philosophy" subtitle="How I approach my work">
-    <div class="max-w-4xl mx-auto">
-        <c-card>
-            <div class="prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
-                {{ site.my_philosophy|linebreaks }}
-            </div>
-        </c-card>
-    </div>
-</c-section>
-{% endif %}
-
-<!-- Beyond Coding Section -->
-{% if site.beyond_coding %}
-<c-section title="Beyond Coding" subtitle="When I'm not building software">
-    <div class="max-w-4xl mx-auto">
-        <c-card>
-            <div class="prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
-                {{ site.beyond_coding|linebreaks }}
-            </div>
-        </c-card>
-    </div>
-</c-section>
-{% endif %}
-
 <!-- My Story Section -->
 <c-section title="My Story" subtitle="The journey that shaped who I am">
     <div class="max-w-4xl mx-auto prose prose-lg dark:prose-invert">

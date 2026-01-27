@@ -18,8 +18,8 @@ class SiteSettingsAdmin(admin.ModelAdmin):
             'fields': ('resume_file',)
         }),
         ('Content Sections', {
-            'fields': ('what_i_do', 'my_philosophy', 'beyond_coding', 'current_projects', 'currently_learning'),
-            'description': 'Editable sections for About page'
+            'fields': ('current_projects', 'currently_learning'),
+            'description': 'Editable fields for Currently section on About page'
         }),
         ('Stats & Achievements', {
             'fields': ('years_experience', 'projects_completed', 'clients_served', 'certifications'),
