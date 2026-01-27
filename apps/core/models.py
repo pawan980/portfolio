@@ -42,6 +42,12 @@ class SiteSettings(TimeStampedModel):
     # Resume
     resume_file = models.FileField(upload_to='resume/', blank=True, null=True)
     
+    # Content Sections
+    what_i_do = models.TextField(blank=True, help_text="What I Do section")
+    currently_learning = models.TextField(blank=True, help_text="Currently Learning section")
+    my_philosophy = models.TextField(blank=True, help_text="My Philosophy section")
+    beyond_coding = models.TextField(blank=True, help_text="Beyond Coding/Interests section")
+    
     # Stats/Achievements
     years_experience = models.IntegerField(default=0, help_text="Years of professional experience")
     projects_completed = models.IntegerField(default=0, help_text="Number of projects completed")
