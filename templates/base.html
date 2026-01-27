@@ -93,6 +93,109 @@
     </script>
 
     {% block extra_scripts %}{% endblock %}
+    <!-- Resume Modal -->
+    {% if site.resume_file %}
+    <div id="resumeModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4"
+        onclick="if(event.target === this) closeResumeModal()">
+        <div class="bg-white dark:bg-gray-800 rounded-xl max-w-6xl w-full max-h-[90vh] flex flex-col">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+                <div>
+                    <h3 class="text-2xl font-bold">Resume Preview</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ site.full_name }}</p>
+                </div>
+                <div class="flex gap-2">
+                    <a href="{% url 'analytics:resume_download' %}?source=modal" class="btn-primary">
+                        <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        Download
+                    </a>
+                    <button onclick="closeResumeModal()" class="btn-secondary">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Share Section -->
+            <div class="px-6 py-4 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                <c-share-buttons title="{{ site.full_name }}'s Resume"
+                    url="{{ request.scheme }}://{{ request.get_host }}{% url 'core:about' %}" />
+            </div>
+
+            <!-- Modal Content -->
+            <div class="flex-1 overflow-auto p-6">
+                <iframe src="{{ site.resume_file.url }}" class="w-full h-full min-h-[600px] border-0"></iframe>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <script>
+        // Resume modal functions
+        function openResumeModal() {
+            const modal = document.getElementById('resumeModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeResumeModal() {
+            const modal = document.getElementById('resumeModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function downloadResume() {
+            {% if site.resume_file %}
+            window.location.href = "{{ site.resume_file.url }}";
+            {% endif %}
+        }
+
+        // Animated counter for stats
+        document.addEventListener('DOMContentLoaded', function () {
+            const counters = document.querySelectorAll('[data-count]');
+
+            if (counters.length === 0) return;
+
+            const animateCounter = (counter) => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000; // 2 seconds
+                const step = target / (duration / 16); // 60fps
+                let current = 0;
+
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        counter.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current);
+                    }
+                }, 16);
+            };
+
+            // Intersection Observer for animation trigger
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter(entry.target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            counters.forEach(counter => observer.observe(counter));
+        });
+    </script>
 </body>
 
 </html>

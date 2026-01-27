@@ -7,7 +7,8 @@
     <div class="text-center px-4 max-w-4xl mx-auto">
         {% if site.profile_image %}
         <img src="{{ site.profile_image.url }}" alt="{{ site.full_name }}"
-            class="w-48 h-48 rounded-full mx-auto mb-6 border-4 border-white dark:border-gray-700 shadow-xl">
+            class="w-48 h-48 md:w-64 md:h-64 rounded-full mx-auto mb-6 border-4 border-white dark:border-gray-700 shadow-xl object-cover"
+            style="image-orientation: from-image;">
         {% endif %}
 
         <h1 class="text-5xl md:text-6xl font-bold mb-4 text-gradient">
@@ -31,6 +32,11 @@
             <a href="{% url 'contact:contact' %}" class="btn-secondary">
                 Get In Touch
             </a>
+            {% if site.resume_file %}
+            <button onclick="openResumeModal()" class="btn-secondary">
+                View Resume
+            </button>
+            {% endif %}
         </div>
 
         <!-- Social Links -->
@@ -42,9 +48,122 @@
     </div>
 </section>
 
-<!-- Skills Section -->
-<c-section title="Skills & Technologies" subtitle="Technologies I work with" id="skills">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-animation">
+<!-- My Story Section -->
+<c-section title="My Story" subtitle="The journey that shaped who I am">
+    <div class="max-w-4xl mx-auto prose prose-lg dark:prose-invert">
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+            Every developer has a unique journey into tech. Mine began with curiosity and evolved into a passion for creating solutions that make a difference. What started as tinkering with code has transformed into a career dedicated to building exceptional digital experiences.
+        </p>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+            What drives me is the intersection of creativity and logic. I'm fascinated by how elegant code can solve complex problems, and how technology can empower people and businesses to achieve their goals. Every project is an opportunity to learn, innovate, and push boundaries.
+        </p>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+            My approach to work is rooted in collaboration, continuous learning, and attention to detail. I believe in writing clean, maintainable code and building solutions that scale. Whether working solo or with a team, I bring dedication, creativity, and a problem-solving mindset to every challenge.
+        </p>
+        <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+            What sets me apart is my commitment to understanding the "why" behind every feature. I don't just write code—I craft solutions that align with business objectives and user needs, ensuring that technology serves as a powerful enabler of success.
+        </p>
+    </div>
+</c-section>
+
+<!-- What I Do Section -->
+<c-section title="What I Do" subtitle="Core expertise and services">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <c-card>
+            <div class="text-primary-600 dark:text-primary-400 mb-3">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Full-Stack Development</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-3 text-sm">Building complete web applications from frontend to backend, with focus on scalability and performance.</p>
+            <div class="flex flex-wrap gap-2">
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">Django</span>
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">React</span>
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">PostgreSQL</span>
+            </div>
+        </c-card>
+
+        <c-card>
+            <div class="text-primary-600 dark:text-primary-400 mb-3">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">UI/UX Design</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-3 text-sm">Creating intuitive, responsive interfaces that prioritize user experience and accessibility.</p>
+            <div class="flex flex-wrap gap-2">
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">Tailwind</span>
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">Figma</span>
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">Alpine.js</span>
+            </div>
+        </c-card>
+
+        <c-card>
+            <div class="text-primary-600 dark:text-primary-400 mb-3">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Cloud & DevOps</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-3 text-sm">Deploying and managing applications with modern cloud infrastructure and CI/CD pipelines.</p>
+            <div class="flex flex-wrap gap-2">
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">AWS</span>
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">Docker</span>
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">GitHub Actions</span>
+            </div>
+        </c-card>
+
+        <c-card>
+            <div class="text-primary-600 dark:text-primary-400 mb-3">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">API Development</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-3 text-sm">Designing and building robust RESTful APIs with proper authentication and documentation.</p>
+            <div class="flex flex-wrap gap-2">
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">REST</span>
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">JWT</span>
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">OpenAPI</span>
+            </div>
+        </c-card>
+
+        <c-card>
+            <div class="text-primary-600 dark:text-primary-400 mb-3">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Security & Optimization</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-3 text-sm">Implementing security best practices and optimizing applications for performance.</p>
+            <div class="flex flex-wrap gap-2">
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">OWASP</span>
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">SSL/TLS</span>
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">Caching</span>
+            </div>
+        </c-card>
+
+        <c-card>
+            <div class="text-primary-600 dark:text-primary-400 mb-3">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                </svg>
+            </div>
+            <h3 class="text-xl font-bold mb-2">Technical Consulting</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-3 text-sm">Providing technical guidance on architecture, technology stack, and best practices.</p>
+            <div class="flex flex-wrap gap-2">
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">Architecture</span>
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">Code Review</span>
+                <span class="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 rounded">Mentoring</span>
+            </div>
+        </c-card>
+    </div>
+</c-section>
+
+<!-- Complete Skills Section -->
+<c-section title="Skills & Technologies" subtitle="Complete technical toolkit" id="skills">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-animation mb-12">
         {% for category, skills in skills_by_category.items %}
         <c-card>
             <h3 class="text-xl font-bold mb-4 text-primary-600 dark:text-primary-400">{{ category }}</h3>
@@ -53,8 +172,7 @@
                 <div>
                     <div class="flex justify-between items-center mb-1">
                         <span class="font-medium">{{ skill.name }}</span>
-                        <span class="text-sm text-gray-600 dark:text-gray-400">{{ skill.get_proficiency_display
-                            }}</span>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">{{ skill.get_proficiency_display }}</span>
                     </div>
                     <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                         <div class="bg-primary-600 h-2 rounded-full transition-all duration-300"
@@ -67,67 +185,96 @@
         </c-card>
         {% endfor %}
     </div>
+
+    <!-- Currently Learning Subsection -->
+    <div class="mt-12">
+        <h3 class="text-2xl font-bold text-center mb-8 text-primary-600 dark:text-primary-400">Currently Learning</h3>
+        <div class="flex flex-wrap justify-center gap-4">
+            <div class="px-6 py-3 bg-gradient-to-r from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900 rounded-lg border-2 border-primary-200 dark:border-primary-800">
+                <span class="font-medium text-primary-700 dark:text-primary-300">🚀 Advanced Python Patterns</span>
+            </div>
+            <div class="px-6 py-3 bg-gradient-to-r from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900 rounded-lg border-2 border-primary-200 dark:border-primary-800">
+                <span class="font-medium text-primary-700 dark:text-primary-300">☁️ AWS Solutions Architect</span>
+            </div>
+            <div class="px-6 py-3 bg-gradient-to-r from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900 rounded-lg border-2 border-primary-200 dark:border-primary-800">
+                <span class="font-medium text-primary-700 dark:text-primary-300">🎨 System Design</span>
+            </div>
+            <div class="px-6 py-3 bg-gradient-to-r from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900 rounded-lg border-2 border-primary-200 dark:border-primary-800">
+                <span class="font-medium text-primary-700 dark:text-primary-300">⚡ Performance Optimization</span>
+            </div>
+        </div>
+    </div>
 </c-section>
 
-<!-- Featured Projects Section -->
+<!-- All Projects Section with Horizontal Scroll -->
 {% if projects %}
-<c-section title="Featured Projects" subtitle="Some of my recent work">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {% for project in projects %}
-        <c-card>
-            <div class="relative overflow-hidden rounded-lg mb-4">
-                <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}"
-                    class="w-full h-48 object-cover transition-transform duration-300 hover:scale-110">
-            </div>
+<c-section title="All Projects" subtitle="Complete portfolio of my work">
+    <div class="relative">
+        <div class="overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-primary-600 scrollbar-track-gray-200 dark:scrollbar-track-gray-800">
+            <div class="flex gap-6" style="width: max-content;">
+                {% for project in projects %}
+                <div class="w-80 flex-shrink-0">
+                    <c-card>
+                        <div class="relative overflow-hidden rounded-lg mb-4">
+                            <img src="{{ project.thumbnail.url }}" alt="{{ project.title }}"
+                                class="w-full h-48 object-cover transition-transform duration-300 hover:scale-110">
+                        </div>
 
-            <h3 class="text-xl font-bold mb-2">
-                <a href="{{ project.get_absolute_url }}" class="hover:text-primary-600 transition-colors">
-                    {{ project.title }}
-                </a>
-            </h3>
+                        <h3 class="text-xl font-bold mb-2">
+                            <a href="{{ project.get_absolute_url }}" class="hover:text-primary-600 transition-colors">
+                                {{ project.title }}
+                            </a>
+                        </h3>
 
-            <p class="text-gray-600 dark:text-gray-400 mb-4">
-                {{ project.short_description }}
-            </p>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">
+                            {{ project.short_description }}
+                        </p>
 
-            <div class="flex flex-wrap gap-2 mb-4">
-                {% for tech in project.get_technologies_list|slice:":4" %}
-                <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded">{{ tech }}</span>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            {% for tech in project.get_technologies_list|slice:":4" %}
+                            <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded">{{ tech }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-gray-700">
+                            <a href="{{ project.get_absolute_url }}" class="text-primary-600 hover:text-primary-700 font-medium">
+                                View Details →
+                            </a>
+                            <div class="flex space-x-3">
+                                {% if project.github_url %}
+                                <a href="{{ project.github_url }}" target="_blank"
+                                    class="text-gray-600 hover:text-gray-900 dark:hover:text-white">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                    </svg>
+                                </a>
+                                {% endif %}
+                                {% if project.live_url %}
+                                <a href="{{ project.live_url }}" target="_blank"
+                                    class="text-gray-600 hover:text-gray-900 dark:hover:text-white">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                    </svg>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </c-card>
+                </div>
                 {% endfor %}
             </div>
-
-            <div class="flex justify-between items-center pt-4 border-t border-gray-200 dark:border-gray-700">
-                <a href="{{ project.get_absolute_url }}" class="text-primary-600 hover:text-primary-700 font-medium">
-                    View Details →
-                </a>
-                <div class="flex space-x-3">
-                    {% if project.github_url %}
-                    <a href="{{ project.github_url }}" target="_blank"
-                        class="text-gray-600 hover:text-gray-900 dark:hover:text-white">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                        </svg>
-                    </a>
-                    {% endif %}
-                    {% if project.live_url %}
-                    <a href="{{ project.live_url }}" target="_blank"
-                        class="text-gray-600 hover:text-gray-900 dark:hover:text-white">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                    </a>
-                    {% endif %}
-                </div>
-            </div>
-        </c-card>
-        {% endfor %}
+        </div>
+        <!-- Scroll Hint -->
+        <div class="text-center mt-4 text-sm text-gray-500 dark:text-gray-400">
+            ← Scroll horizontally to see all projects →
+        </div>
     </div>
 
-    <div class="text-center mt-12">
+    <div class="text-center mt-8">
         <a href="{% url 'projects:list' %}" class="btn-primary">
-            View All Projects
+            View All in Grid
         </a>
     </div>
 </c-section>
@@ -171,57 +318,61 @@
 </c-section>
 {% endif %}
 
-<!-- Education & Certifications Section -->
-<c-section title="Education & Certifications">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- Education -->
-        {% if education %}
-        <div>
-            <h3 class="text-2xl font-bold mb-6 text-primary-600 dark:text-primary-400">Education</h3>
-            <div class="space-y-6">
-                {% for edu in education %}
-                <c-card>
-                    <h4 class="text-lg font-bold">{{ edu.get_degree_display }}</h4>
-                    <p class="text-primary-600 dark:text-primary-400">{{ edu.field_of_study }}</p>
-                    <p class="text-gray-600 dark:text-gray-400">{{ edu.institution }}</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-500 mt-2">
-                        {{ edu.start_date|date:"Y" }} - {% if edu.is_current %}Present{% else %}{{ edu.end_date|date:"Y"
-                        }}{% endif %}
-                    </p>
-                    {% if edu.grade %}
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Grade: {{ edu.grade }}</p>
-                    {% endif %}
-                </c-card>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-
-        <!-- Certifications -->
-        {% if certifications %}
-        <div>
-            <h3 class="text-2xl font-bold mb-6 text-primary-600 dark:text-primary-400">Certifications</h3>
-            <div class="space-y-4">
-                {% for cert in certifications %}
-                <c-card>
-                    <h4 class="font-bold">{{ cert.name }}</h4>
-                    <p class="text-gray-600 dark:text-gray-400">{{ cert.issuing_organization }}</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-500 mt-2">
-                        Issued: {{ cert.date_obtained|date:"M Y" }}
-                    </p>
-                    {% if cert.credential_url %}
-                    <a href="{{ cert.credential_url }}" target="_blank"
-                        class="text-sm text-primary-600 hover:text-primary-700 mt-2 inline-block">
-                        View Credential →
-                    </a>
-                    {% endif %}
-                </c-card>
-                {% endfor %}
-            </div>
-        </div>
-        {% endif %}
+<!-- Education Section -->
+{% if education %}
+<c-section title="Education" subtitle="My academic background">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for edu in education %}
+        <c-card>
+            <h4 class="text-xl font-bold mb-2">{{ edu.get_degree_display }}</h4>
+            <p class="text-primary-600 dark:text-primary-400 font-medium mb-2">{{ edu.field_of_study }}</p>
+            <p class="text-gray-600 dark:text-gray-400 mb-2">{{ edu.institution }}</p>
+            <p class="text-sm text-gray-500 dark:text-gray-500 mb-3">
+                {{ edu.start_date|date:"Y" }} - {% if edu.is_current %}Present{% else %}{{ edu.end_date|date:"Y" }}{% endif %}
+            </p>
+            {% if edu.grade %}
+            <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Grade: {{ edu.grade }}</p>
+            {% endif %}
+            {% if edu.institution_url %}
+            <a href="{{ edu.institution_url }}" target="_blank"
+                class="text-sm text-primary-600 hover:text-primary-700 font-medium inline-flex items-center">
+                Visit Institution
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+            </a>
+            {% endif %}
+        </c-card>
+        {% endfor %}
     </div>
 </c-section>
+{% endif %}
+
+<!-- Certifications Section -->
+{% if certifications %}
+<c-section title="Certifications" subtitle="Professional credentials and achievements">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for cert in certifications %}
+        <c-card>
+            <h4 class="font-bold text-lg mb-2">{{ cert.name }}</h4>
+            <p class="text-gray-600 dark:text-gray-400 mb-2">{{ cert.issuing_organization }}</p>
+            <p class="text-sm text-gray-500 dark:text-gray-500 mb-3">
+                Issued: {{ cert.date_obtained|date:"M Y" }}
+            </p>
+            {% if cert.credential_url %}
+            <a href="{{ cert.credential_url }}" target="_blank"
+                class="text-sm text-primary-600 hover:text-primary-700 font-medium inline-flex items-center">
+                View Credential 
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+            </a>
+            {% endif %}
+        </c-card>
+        {% endfor %}
+    </div>
+</c-section>
+{% endif %}
 
 <!-- Stats/Achievements Section -->
 {% if site.years_experience or site.projects_completed or site.clients_served or site.certifications %}
@@ -383,6 +534,178 @@
 </c-section>
 {% endif %}
 
+<!-- My Philosophy Section -->
+<c-section title="My Philosophy" subtitle="How I approach work and projects">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <c-card>
+            <div class="flex items-start mb-4">
+                <div class="text-primary-600 dark:text-primary-400 mr-4">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Quality Over Quantity</h3>
+                    <p class="text-gray-600 dark:text-gray-400">I believe in writing clean, maintainable code that stands the test of time. Every line should have a purpose, and every feature should add real value.</p>
+                </div>
+            </div>
+        </c-card>
+
+        <c-card>
+            <div class="flex items-start mb-4">
+                <div class="text-primary-600 dark:text-primary-400 mr-4">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Collaboration First</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Great solutions come from great teamwork. I value open communication, knowledge sharing, and building together with stakeholders and team members.</p>
+                </div>
+            </div>
+        </c-card>
+
+        <c-card>
+            <div class="flex items-start mb-4">
+                <div class="text-primary-600 dark:text-primary-400 mr-4">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Continuous Learning</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Technology evolves rapidly, and so should we. I dedicate time to learning new technologies, patterns, and best practices to stay ahead of the curve.</p>
+                </div>
+            </div>
+        </c-card>
+
+        <c-card>
+            <div class="flex items-start mb-4">
+                <div class="text-primary-600 dark:text-primary-400 mr-4">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">User-Centric Design</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Every decision should prioritize the end user. I build with empathy, ensuring solutions are intuitive, accessible, and solve real problems.</p>
+                </div>
+            </div>
+        </c-card>
+    </div>
+</c-section>
+
+<!-- Beyond Coding Section -->
+<c-section title="Beyond Coding" subtitle="Life outside the terminal">
+    <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                <div class="text-4xl mb-3">📚</div>
+                <h4 class="font-bold mb-2">Reading</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Tech blogs & sci-fi novels</p>
+            </div>
+            <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                <div class="text-4xl mb-3">🎮</div>
+                <h4 class="font-bold mb-2">Gaming</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Strategy & puzzle games</p>
+            </div>
+            <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                <div class="text-4xl mb-3">🏃</div>
+                <h4 class="font-bold mb-2">Fitness</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Running & yoga</p>
+            </div>
+            <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                <div class="text-4xl mb-3">✈️</div>
+                <h4 class="font-bold mb-2">Travel</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Exploring new cultures</p>
+            </div>
+            <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                <div class="text-4xl mb-3">🎵</div>
+                <h4 class="font-bold mb-2">Music</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Electronic & indie</p>
+            </div>
+            <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                <div class="text-4xl mb-3">📷</div>
+                <h4 class="font-bold mb-2">Photography</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Landscape & urban</p>
+            </div>
+            <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                <div class="text-4xl mb-3">🍳</div>
+                <h4 class="font-bold mb-2">Cooking</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Experimenting recipes</p>
+            </div>
+            <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                <div class="text-4xl mb-3">🤝</div>
+                <h4 class="font-bold mb-2">Mentoring</h4>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Helping others learn</p>
+            </div>
+        </div>
+    </div>
+</c-section>
+
+<!-- Currently Section -->
+<c-section title="Currently" subtitle="What I'm up to right now">
+    <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <c-card>
+                <h3 class="text-xl font-bold mb-4 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                    </svg>
+                    Current Projects
+                </h3>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <span class="text-primary-600 dark:text-primary-400 mr-2">▸</span>
+                        <span class="text-gray-700 dark:text-gray-300">Building a modern portfolio platform with Django & Tailwind</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-primary-600 dark:text-primary-400 mr-2">▸</span>
+                        <span class="text-gray-700 dark:text-gray-300">Contributing to open-source Python projects</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-primary-600 dark:text-primary-400 mr-2">▸</span>
+                        <span class="text-gray-700 dark:text-gray-300">Exploring serverless architectures on AWS</span>
+                    </li>
+                </ul>
+            </c-card>
+
+            <c-card>
+                <h3 class="text-xl font-bold mb-4 flex items-center">
+                    <svg class="w-6 h-6 mr-2 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                    Learning
+                </h3>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <span class="text-primary-600 dark:text-primary-400 mr-2">▸</span>
+                        <span class="text-gray-700 dark:text-gray-300">Advanced Python design patterns</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-primary-600 dark:text-primary-400 mr-2">▸</span>
+                        <span class="text-gray-700 dark:text-gray-300">AWS Solutions Architect certification prep</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-primary-600 dark:text-primary-400 mr-2">▸</span>
+                        <span class="text-gray-700 dark:text-gray-300">System design at scale</span>
+                    </li>
+                </ul>
+            </c-card>
+        </div>
+
+        <div class="mt-8 text-center">
+            <div class="inline-flex items-center px-6 py-3 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded-full font-medium">
+                <span class="w-3 h-3 bg-green-500 rounded-full mr-3 animate-pulse"></span>
+                Available for new opportunities
+            </div>
+            <p class="text-gray-600 dark:text-gray-400 mt-4">
+                Open to full-time roles, contract work, and interesting collaborations
+            </p>
+        </div>
+    </div>
+</c-section>
+
 <!-- CTA Section -->
 <section class="bg-primary-600 dark:bg-primary-700 text-white py-20">
     <div class="max-w-4xl mx-auto text-center px-4">
@@ -396,100 +719,5 @@
         </a>
     </div>
 </section>
-
-<script>
-    // Animated counter for stats
-    document.addEventListener('DOMContentLoaded', function () {
-        const counters = document.querySelectorAll('[data-count]');
-
-        const animateCounter = (counter) => {
-            const target = parseInt(counter.getAttribute('data-count'));
-            const duration = 2000; // 2 seconds
-            const step = target / (duration / 16); // 60fps
-            let current = 0;
-
-            const timer = setInterval(() => {
-                current += step;
-                if (current >= target) {
-                    counter.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    counter.textContent = Math.floor(current);
-                }
-            }, 16);
-        };
-
-        // Intersection Observer for animation trigger
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounter(entry.target);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        counters.forEach(counter => observer.observe(counter));
-    });
-
-    // Resume modal
-    function openResumeModal() {
-        document.getElementById('resumeModal').classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeResumeModal() {
-        document.getElementById('resumeModal').classList.add('hidden');
-        document.body.style.overflow = 'auto';
-    }
-
-    function downloadResume() {
-        {% if site.resume_file %}
-        window.location.href = "{{ site.resume_file.url }}";
-        {% endif %}
-    }
-</script>
-
-<!-- Resume Modal -->
-{% if site.resume_file %}
-<div id="resumeModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4"
-    onclick="if(event.target === this) closeResumeModal()">
-    <div class="bg-white dark:bg-gray-800 rounded-xl max-w-6xl w-full max-h-[90vh] flex flex-col">
-        <!-- Modal Header -->
-        <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-            <div>
-                <h3 class="text-2xl font-bold">Resume Preview</h3>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">{{ site.full_name }}</p>
-            </div>
-            <div class="flex gap-2">
-                <a href="{% url 'analytics:resume_download' %}?source=modal" class="btn-primary">
-                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                    </svg>
-                    Download
-                </a>
-                <button onclick="closeResumeModal()" class="btn-secondary">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                        </path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-
-        <!-- Share Section -->
-        <div class="px-6 py-4 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-            <c-share-buttons title="{{ site.full_name }}'s Resume"
-                url="{{ request.scheme }}://{{ request.get_host }}{% url 'core:about' %}" />
-        </div>
-
-        <!-- Modal Content -->
-        <div class="flex-1 overflow-auto p-6">
-            <iframe src="{{ site.resume_file.url }}" class="w-full h-full min-h-[600px] border-0"></iframe>
-        </div>
-    </div>
-</div>
-{% endif %}
 
 {% endblock %}
