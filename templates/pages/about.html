@@ -373,7 +373,7 @@
 
 <!-- Education Section -->
 {% if education %}
-<c-section title="Education" subtitle="My academic background" id="certifications">
+<c-section title="Education" subtitle="My academic background">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {% for edu in education %}
         <c-card>
@@ -405,7 +405,7 @@
 
 <!-- Certifications Section -->
 {% if certifications %}
-<c-section title="Certifications" subtitle="Professional credentials and achievements">
+<c-section title="Certifications" subtitle="Professional credentials and achievements" id="certifications">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {% for cert in certifications %}
         <c-card>
