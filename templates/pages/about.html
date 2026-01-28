@@ -219,7 +219,12 @@
                 {% for skill in skills %}
                 <div>
                     <div class="flex justify-between items-center mb-1">
-                        <span class="font-medium">{{ skill.name }}</span>
+                        <span class="font-medium">
+                            {% if skill.icon %}
+                            <i class="{{ skill.icon }} mr-2 text-lg"></i>
+                            {% endif %}
+                            {{ skill.name }}
+                        </span>
                         <span class="text-sm text-gray-600 dark:text-gray-400">{{ skill.get_proficiency_display
                             }}</span>
                     </div>
