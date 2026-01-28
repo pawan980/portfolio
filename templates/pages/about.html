@@ -54,6 +54,11 @@
 <!-- My Story Section -->
 <c-section title="My Story" subtitle="The journey that shaped who I am">
     <div class="max-w-4xl mx-auto prose prose-lg prose-invert">
+        {% if site.my_story %}
+        <div class="text-gray-300 leading-relaxed">
+            {{ site.my_story|linebreaks }}
+        </div>
+        {% else %}
         <p class="text-gray-300 leading-relaxed mb-6">
             Every developer has a unique journey into tech. Mine began with curiosity and evolved into a passion for
             creating solutions that make a difference. What started as tinkering with code has transformed into a career
@@ -74,6 +79,7 @@
             code—I craft solutions that align with business objectives and user needs, ensuring that technology serves
             as a powerful enabler of success.
         </p>
+        {% endif %}
     </div>
 </c-section>
 

@@ -7,7 +7,7 @@ from .models import SiteSettings, Skill
 class SiteSettingsAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Personal Information', {
-            'fields': ('full_name', 'tagline', 'home_bio', 'bio', 'profile_image')
+            'fields': ('full_name', 'tagline', 'home_bio', 'bio', 'my_story', 'profile_image')
         }),
         ('Contact', {
             'fields': ('email', 'phone', 'location')

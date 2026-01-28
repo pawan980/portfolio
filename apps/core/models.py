@@ -28,6 +28,7 @@ class SiteSettings(TimeStampedModel):
     tagline = models.CharField(max_length=200, default="Full Stack Developer")
     home_bio = models.TextField(help_text="Short bio for home page hero section", blank=True)
     bio = models.TextField(help_text="Detailed bio for about page")
+    my_story = models.TextField(help_text="My Story section content for about page", blank=True)
     profile_image = models.ImageField(upload_to='profile/', blank=True, null=True)
     
     # Contact Information
