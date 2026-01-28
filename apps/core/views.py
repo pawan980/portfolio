@@ -99,13 +99,33 @@ class AboutView(TemplateView):
         try:
             # All skills grouped by category
             if self._table_exists('core_skill'):
+                from collections import OrderedDict
                 skills = Skill.objects.filter(is_active=True)
-                context['skills_by_category'] = {}
+                
+                # Define category order
+                category_order = [
+                    'Programming Languages',
+                    'Frontend',
+                    'Backend',
+                    'Database',
+                    'DevOps & Tools',
+                    'Cloud Platforms',
+                    'Other'
+                ]
+                
+                # Use OrderedDict to maintain order
+                skills_dict = {}
                 for skill in skills:
                     category = skill.get_category_display()
-                    if category not in context['skills_by_category']:
-                        context['skills_by_category'][category] = []
-                    context['skills_by_category'][category].append(skill)
+                    if category not in skills_dict:
+                        skills_dict[category] = []
+                    skills_dict[category].append(skill)
+                
+                # Order by predefined category order
+                context['skills_by_category'] = OrderedDict()
+                for cat in category_order:
+                    if cat in skills_dict:
+                        context['skills_by_category'][cat] = skills_dict[cat]
             else:
                 context['skills_by_category'] = {}
             
