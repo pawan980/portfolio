@@ -97,37 +97,48 @@ class AboutView(TemplateView):
         context = super().get_context_data(**kwargs)
         
         try:
-            # All skills grouped by category
+            # All skills grouped hierarchically for cyberpunk design
             if self._table_exists('core_skill'):
                 from collections import OrderedDict
                 skills = Skill.objects.filter(is_active=True)
                 
-                # Define category order
+                #Define category order for numbered cards (01-06)
                 category_order = [
-                    'Programming Languages',
-                    'Frontend',
-                    'Backend',
-                    'Database',
-                    'DevOps & Tools',
-                    'Cloud Platforms',
-                    'Other'
+                    'compute',
+                    'data',
+                    'platform',
+                    'devops',
+                    'observability',
+                    'architecture',
                 ]
                 
-                # Use OrderedDict to maintain order
-                skills_dict = {}
+                # Group skills by category and subcategory
+                skills_hierarchy = {}
                 for skill in skills:
-                    category = skill.get_category_display()
-                    if category not in skills_dict:
-                        skills_dict[category] = []
-                    skills_dict[category].append(skill)
+                    category = skill.category
+                    if category not in skills_hierarchy:
+                        skills_hierarchy[category] = {}
+                    
+                    subcategory = skill.subcategory
+                    if subcategory not in skills_hierarchy[category]:
+                        skills_hierarchy[category][subcategory] = []
+                    
+                    skills_hierarchy[category][subcategory].append(skill)
                 
-                # Order by predefined category order
-                context['skills_by_category'] = OrderedDict()
-                for cat in category_order:
-                    if cat in skills_dict:
-                        context['skills_by_category'][cat] = skills_dict[cat]
+                # Build ordered structure with metadata
+                context['skills_categories'] = []
+                for idx, cat_key in enumerate(category_order, 1):
+                    if cat_key in skills_hierarchy:
+                        context['skills_categories'].append({
+                            'number': f'{idx:02d}',  # 01, 02, 03, etc.
+                            'key': cat_key,
+                            'name': dict(Skill.CATEGORY_CHOICES)[cat_key],
+                            'description': Skill.CATEGORY_DESCRIPTIONS[cat_key],
+                            'icon': Skill.CATEGORY_ICONS[cat_key],
+                            'subcategories': skills_hierarchy[cat_key]
+                        })
             else:
-                context['skills_by_category'] = {}
+                context['skills_categories'] = []
             
             # All projects
             if self._table_exists('projects_project'):

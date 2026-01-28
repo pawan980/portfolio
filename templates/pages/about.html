@@ -209,36 +209,140 @@
     </div>
 </c-section>
 
-<!-- Complete Skills Section -->
-<c-section title="Skills & Technologies" subtitle="Complete technical toolkit" id="skills">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-animation mb-12">
-        {% for category, skills in skills_by_category.items %}
-        <c-card>
-            <h3 class="text-xl font-bold mb-4 text-primary-600 dark:text-primary-400">{{ category }}</h3>
-            <div class="space-y-3">
-                {% for skill in skills %}
-                <div>
-                    <div class="flex justify-between items-center mb-1">
-                        <span class="font-medium">
-                            {% if skill.icon %}
-                            <i class="{{ skill.icon }} mr-2 text-lg"></i>
-                            {% endif %}
-                            {{ skill.name }}
-                        </span>
-                        <span class="text-sm text-gray-600 dark:text-gray-400">{{ skill.get_proficiency_display}}</span>
+<!-- Cyberpunk Skills Section -->
+<section class="py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden" id="skills">
+    <!-- Background effects -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full filter blur-3xl"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full filter blur-3xl"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+            <h2 class="text-5xl md:text-6xl font-bold mb-4 text-white" style="font-family: 'Sora', sans-serif;">
+                Skills & <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Technologies</span>
+            </h2>
+            <p class="text-xl text-gray-400">Complete technical expertise across the stack</p>
+        </div>
+
+        <!-- Skills Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for category in skills_categories %}
+            <div class="cyberpunk-card group">
+                <div class="mb-6">
+                    <div class="flex items-center mb-2">
+                        <span class="text-4xl mr-3">{{ category.icon }}</span>
+                        <h3 class="text-2xl font-bold text-white" style="font-family: 'Sora', sans-serif;">
+                            {{ category.name }}
+                        </h3>
                     </div>
-                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                        <div class="bg-primary-600 h-2 rounded-full transition-all duration-300"
-                            style="width: {% if skill.proficiency == 'beginner' %}25%{% elif skill.proficiency == 'intermediate' %}50%{% elif skill.proficiency == 'advanced' %}75%{% else %}90%{% endif %}">
+                    <p class="text-sm text-cyan-300/80 italic">{{ category.description }}</p>
+                </div>
+
+                <!-- Subcategories -->
+                <div class="space-y-4">
+                    {% for subcategory, skills in category.subcategories.items %}
+                    <div>
+                        <h4 class="font-semibold text-cyan-300 text-sm mb-2 px-3"
+                            style="font-family: 'Sora', sans-serif;">
+                            {{ subcategory }}
+                        </h4>
+                        <div class="flex flex-wrap gap-2 px-3">
+                            {% for skill in skills %}
+                            <span class="tech-tag">
+                                {% if skill.icon %}
+                                <i class="{{ skill.icon }} text-base"></i>
+                                {% endif %}
+                                {{ skill.name }}{% if skill.details %} <span class="text-cyan-300/60 text-xs">({{
+                                    skill.details }})</span>{% endif %}
+                            </span>
+                            {% endfor %}
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
-        </c-card>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-</c-section>
+</section>
+
+<style>
+    /* Cyberpunk card styles */
+    .cyberpunk-card {
+        position: relative;
+        background: linear-gradient(135deg, rgba(26, 31, 58, 0.9) 0%, rgba(10, 14, 39, 0.9) 100%);
+        border: 1px solid rgba(0, 217, 255, 0.2);
+        border-radius: 1rem;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        opacity: 0;
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+
+    .cyberpunk-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(0, 217, 255, 0.5);
+        box-shadow: 0 10px 40px rgba(0, 217, 255, 0.3),
+            0 0 20px rgba(181, 55, 242, 0.2);
+    }
+
+    .cyberpunk-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(0, 217, 255, 0.05) 0%, rgba(181, 55, 242, 0.05) 100%);
+        border-radius: 1rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    .cyberpunk-card:hover::before {
+        opacity: 1;
+    }
+
+    /* Tech tag styles */
+    .tech-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.5rem 0.875rem;
+        background: rgba(0, 217, 255, 0.1);
+        border: 1px solid rgba(0, 217, 255, 0.3);
+        border-radius: 0.5rem;
+        color: #e0e7ff;
+        font-size: 0.875rem;
+        font-family: 'JetBrains Mono', monospace;
+        transition: all 0.3s ease;
+        cursor: default;
+    }
+
+    .tech-tag:hover {
+        transform: scale(1.05);
+        background: rgba(0, 217, 255, 0.2);
+        border-color: rgba(0, 217, 255, 0.6);
+        box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+    }
+
+    /* Fade in animation */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
 
 <!-- All Projects Section with Horizontal Scroll -->
 {% if projects %}

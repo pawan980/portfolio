@@ -80,34 +80,57 @@ class SiteSettings(TimeStampedModel):
 
 
 class Skill(TimeStampedModel):
-    """Technical skills with categories and proficiency levels."""
+    """Technical skills with hierarchical categories and subcategories."""
     
     CATEGORY_CHOICES = [
-        ('programming', 'Programming Languages'),
-        ('frontend', 'Frontend'),
-        ('backend', 'Backend'),
-        ('database', 'Database'),
-        ('devops', 'DevOps & Tools'),
-        ('cloud', 'Cloud Platforms'),
-        ('other', 'Other'),
+        ('compute', 'Compute & Application Logic'),
+        ('data', 'Data Strategy & Persistence'),
+        ('platform', 'Platform Engineering (Infrastructure)'),
+        ('devops', 'DevOps & Delivery Automation'),
+        ('observability', 'Observability & Reliability (SRE)'),
+        ('architecture', 'System Architecture & Networking'),
     ]
     
-    PROFICIENCY_CHOICES = [
-        ('beginner', 'Beginner'),
-        ('intermediate', 'Intermediate'),
-        ('advanced', 'Advanced'),
-        ('expert', 'Expert'),
-    ]
+    CATEGORY_DESCRIPTIONS = {
+        'compute': 'Writing and structuring the code itself',
+        'data': 'How data is stored, retrieved, and moved',
+        'platform': 'The environment where the code runs',
+        'devops': 'The pipeline that moves code to production',
+        'observability': 'Keeping the system healthy and debugging production',
+        'architecture': 'The high-level design and communication protocols',
+    }
     
-    name = models.CharField(max_length=50)
-    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='other')
-    proficiency = models.CharField(max_length=20, choices=PROFICIENCY_CHOICES, default='intermediate')
-    icon = models.CharField(max_length=50, blank=True, help_text="Icon class (e.g., devicon-python-plain)")
-    order = models.IntegerField(default=0)
+    CATEGORY_ICONS = {
+        'compute': '🔧',
+        'data': '💾',
+        'platform': '☁️',
+        'devops': '🚀',
+        'observability': '📊',
+        'architecture': '🏗️',
+    }
+    
+    name = models.CharField(max_length=100, help_text="Technology name (e.g., PostgreSQL, Docker)")
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, help_text="Main category")
+    subcategory = models.CharField(max_length=100, help_text="Subcategory (e.g., Languages, Web Frameworks)")
+    details = models.CharField(max_length=200, blank=True, help_text="Optional details (e.g., Optimization, Schema Design)")
+    icon = models.CharField(max_length=100, blank=True, help_text="Devicon class (e.g., devicon-python-plain colored)")
+    order = models.IntegerField(default=0, help_text="Display order within subcategory")
     is_active = models.BooleanField(default=True)
     
     class Meta:
-        ordering = ['category', 'order', 'name']
+        ordering = ['category', 'subcategory', 'order', 'name']
+        verbose_name = "Skill"
+        verbose_name_plural = "Skills"
     
     def __str__(self):
-        return f"{self.name} ({self.get_category_display()})"
+        if self.details:
+            return f"{self.name} ({self.details}) - {self.get_category_display()}"
+        return f"{self.name} - {self.get_category_display()}"
+    
+    def get_category_description(self):
+        """Get the description for this skill's category."""
+        return self.CATEGORY_DESCRIPTIONS.get(self.category, '')
+    
+    def get_category_icon(self):
+        """Get the icon for this skill's category."""
+        return self.CATEGORY_ICONS.get(self.category, '')

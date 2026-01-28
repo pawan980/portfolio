@@ -39,7 +39,15 @@ class SiteSettingsAdmin(admin.ModelAdmin):
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'proficiency', 'order', 'is_active')
-    list_filter = ('category', 'proficiency', 'is_active')
+    list_display = ('name', 'category', 'subcategory', 'details', 'order', 'is_active')
+    list_filter = ('category', 'subcategory', 'is_active')
     list_editable = ('order', 'is_active')
-    search_fields = ('name',)
+    search_fields = ('name', 'subcategory', 'details')
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('name', 'category', 'subcategory', 'details')
+        }),
+        ('Display', {
+            'fields': ('icon', 'order', 'is_active')
+        }),
+    )
