@@ -40,7 +40,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 </head>
 
-<body class="antialiased">
+<body class="antialiased bg-gradient-to-b from-cyber-dark to-black text-cyber-text">
 
     <!-- Navigation -->
     <c-navbar></c-navbar>
@@ -57,7 +57,7 @@
     <div x-data="{ show: false }" @scroll.window="show = window.pageYOffset > 300" x-show="show" x-transition
         class="fixed bottom-8 right-8 z-50">
         <button @click="window.scrollTo({ top: 0, behavior: 'smooth' })"
-            class="bg-primary-600 hover:bg-primary-700 text-white p-3 rounded-full shadow-lg">
+            class="bg-gradient-to-r from-cyber-cyan to-cyber-purple hover:shadow-glow-cyan text-white p-3 rounded-full shadow-lg transition-all duration-300">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
             </svg>
