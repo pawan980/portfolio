@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
+import markdown
 
 
 class BlogPost(models.Model):
@@ -10,6 +11,7 @@ class BlogPost(models.Model):
     excerpt = models.TextField(max_length=300, help_text="Short description for previews")
     content = models.TextField(help_text="Full blog post content (supports Markdown)")
     cover_image = models.ImageField(upload_to='blog/', blank=True, null=True, help_text="Featured image")
+    external_url = models.URLField(blank=True, help_text="Link to externally published blog (e.g., Medium, Dev.to)")
     
     # Metadata
     author = models.CharField(max_length=100, default="Pawan Kumar")
@@ -43,3 +45,10 @@ class BlogPost(models.Model):
     
     def get_tags_list(self):
         return [tag.strip() for tag in self.tags.split(',') if tag.strip()]
+    
+    def get_content_as_html(self):
+        """Convert markdown content to HTML."""
+        return markdown.markdown(
+            self.content,
+            extensions=['extra', 'codehilite', 'nl2br', 'sane_lists']
+        )
