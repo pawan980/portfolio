@@ -1,7 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" :class="{ 'dark': darkMode }"
-    x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -38,6 +37,67 @@
 
     <!-- Devicon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+    <!-- Cyberpunk Styles -->
+    <style>
+        /* Cyberpunk card styles */
+        .cyberpunk-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.9) 0%, rgba(10, 14, 39, 0.9) 100%);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .cyberpunk-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 217, 255, 0.5);
+            box-shadow: 0 10px 40px rgba(0, 217, 255, 0.3),
+                0 0 20px rgba(181, 55, 242, 0.2);
+        }
+
+        .cyberpunk-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.05) 0%, rgba(181, 55, 242, 0.05) 100%);
+            border-radius: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .cyberpunk-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Tech tag styles */
+        .tech-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.5rem 0.875rem;
+            background: rgba(0, 217, 255, 0.1);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            border-radius: 0.5rem;
+            color: #e0e7ff;
+            font-size: 0.875rem;
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .tech-tag:hover {
+            transform: scale(1.05);
+            background: rgba(0, 217, 255, 0.2);
+            border-color: rgba(0, 217, 255, 0.6);
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+        }
+    </style>
 </head>
 
 <body class="antialiased bg-gradient-to-b from-cyber-dark to-black text-cyber-text">

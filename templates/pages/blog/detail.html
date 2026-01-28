@@ -4,89 +4,102 @@
 
 {% block content %}
 
-<!-- Article Header -->
-<article class="max-w-4xl mx-auto px-4 pt-32 md:pt-36 lg:pt-40 pb-16">
-    {% if post.cover_image %}
-    <img src="{{ post.cover_image.url }}" alt="{{ post.title }}" class="w-full h-96 object-cover rounded-xl mb-8">
-    {% endif %}
-
-    <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ post.title }}</h1>
-
-    <div
-        class="flex items-center text-gray-600 dark:text-gray-400 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
-        <span class="mr-4">By {{ post.author }}</span>
-        <span class="mr-4">•</span>
-        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-        </svg>
-        {{ post.published_date|date:"M d, Y" }}
-        <span class="mx-2">•</span>
-        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        {{ post.read_time }} min read
-        <span class="mx-2">•</span>
-        <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
-            </path>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-            </path>
-        </svg>
-        {{ post.views }} views
-    </div>
-
-    <!-- Tags -->
-    {% if post.tags %}
-    <div class="flex flex-wrap gap-2 mb-8">
-        {% for tag in post.get_tags_list %}
-        <span
-            class="px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 text-sm rounded-full">
-            {{ tag }}
-        </span>
-        {% endfor %}
-    </div>
-    {% endif %}
-
-    <!-- Article Content -->
-    <div class="prose prose-lg dark:prose-invert max-w-none">
-        {{ post.get_content_as_html|safe }}
-    </div>
-
-    <!-- External Link -->
-    {% if post.external_url %}
-    <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
-        <a href="{{ post.external_url }}" target="_blank" rel="noopener noreferrer"
-            class="inline-flex items-center px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-            Read on External Site
-        </a>
-    </div>
-    {% endif %}
-
-    <!-- Share Buttons -->
-    <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-        <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-6">
-            <h3 class="text-lg font-semibold mb-4">Share this article</h3>
-            <c-share-buttons title="{{ post.title }}" url="{{ request.build_absolute_uri }}" />
+<!-- Cyberpunk Article Container -->
+<div class="bg-black min-h-screen">
+    <!-- Article Header -->
+    <article class="max-w-4xl mx-auto px-4 pt-32 md:pt-36 lg:pt-40 pb-16">
+        {% if post.cover_image %}
+        <div class="relative overflow-hidden rounded-xl mb-8 group">
+            <img src="{{ post.cover_image.url }}" alt="{{ post.title }}" class="w-full h-96 object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/60 transition-all duration-300"></div>
         </div>
-    </div>
+        {% endif %}
 
-    <!-- Navigation -->
-    <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
-        <a href="{% url 'blog:list' %}" class="btn-secondary inline-flex items-center">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight" style="font-family: 'Sora', sans-serif;">{{ post.title }}</h1>
+
+        <div class="flex flex-wrap items-center text-gray-400 mb-8 pb-8 border-b border-cyan-500/30 font-mono text-sm">
+            <span class="mr-4 text-cyan-400 font-semibold">{{ post.author }}</span>
+            <span class="mr-4 text-cyan-500">•</span>
+            <svg class="w-5 h-5 mr-2 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            {{ post.published_date|date:"M d, Y" }}
+            <span class="mx-2 text-purple-500">•</span>
+            <svg class="w-5 h-5 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            {{ post.read_time }} min read
+            <span class="mx-2 text-cyan-500">•</span>
+            <svg class="w-5 h-5 mr-2 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z">
+                </path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
                 </path>
             </svg>
-            Back to Blog
-        </a>
-    </div>
-</article>
+            {{ post.views }} views
+        </div>
+
+        <!-- Tags -->
+        {% if post.tags %}
+        <div class="flex flex-wrap gap-2 mb-8">
+            {% for tag in post.get_tags_list %}
+            <span class="tech-tag">
+                {{ tag }}
+            </span>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Article Content -->
+        <div class="cyberpunk-card">
+            <div class="prose prose-lg prose-invert max-w-none
+                        prose-headings:text-white prose-headings:font-bold
+                        prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
+                        prose-p:text-gray-300 prose-p:leading-relaxed
+                        prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:text-cyan-300
+                        prose-strong:text-white prose-strong:font-semibold
+                        prose-code:text-purple-400 prose-code:bg-gray-900/50 prose-code:px-2 prose-code:py-1 prose-code:rounded
+                        prose-pre:bg-gray-900/80 prose-pre:border prose-pre:border-cyan-500/30
+                        prose-blockquote:border-l-4 prose-blockquote:border-cyan-500 prose-blockquote:text-gray-400 prose-blockquote:italic
+                        prose-ul:text-gray-300 prose-ol:text-gray-300
+                        prose-li:marker:text-cyan-400">
+                {{ post.get_content_as_html|safe }}
+            </div>
+        </div>
+
+        <!-- External Link -->
+        {% if post.external_url %}
+        <div class="mt-8">
+            <a href="{{ post.external_url }}" target="_blank" rel="noopener noreferrer"
+                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-bold rounded-lg hover:shadow-glow-mixed transition-all duration-300 group">
+                <svg class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                Read on External Site
+            </a>
+        </div>
+        {% endif %}
+
+        <!-- Share Buttons -->
+        <div class="mt-12">
+            <div class=\"cyberpunk-card\">\n                <h3 class=\"text-xl font-bold mb-4 text-white\" style=\"font-family: 'Sora', sans-serif;\">Share this article</h3>\n                <c-share-buttons title=\"{{ post.title }}\" url=\"{{ request.build_absolute_uri }}\" />\n            </div>\n        </div>
+
+        <!-- Navigation -->
+        <div class="mt-8">
+            <a href="{% url 'blog:list' %}" 
+                class="inline-flex items-center px-6 py-3 bg-gray-900/50 border border-cyan-500/30 text-cyan-400 rounded-lg hover:border-cyan-500 hover:shadow-glow-cyan transition-all group">
+                <svg class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18">
+                    </path>
+                </svg>
+                Back to Blog
+            </a>
+        </div>
+    </article>
+</div>
 
 {% endblock %}
