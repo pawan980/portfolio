@@ -93,18 +93,12 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 stagger-animation">
         {% for category, skills in top_skills_by_category.items %}
         <c-card>
-            <h3 class="text-xl font-bold mb-4 text-primary-600 dark:text-primary-400">{{ category }}</h3>
-            <div class="space-y-3">
+            <h3 class="text-xl font-bold mb-4 text-cyan-400">{{ category }}</h3>
+            <div class="flex flex-wrap gap-2">
                 {% for skill in skills %}
-                <div>
-                    <div class="flex justify-between mb-1">
-                        <span class="text-sm font-medium">{{ skill.name }}</span>
-                        <span class="text-sm text-gray-500">{{ skill.proficiency }}%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                        <div class="bg-primary-600 h-2 rounded-full" style="width: {{ skill.proficiency }}%"></div>
-                    </div>
-                </div>
+                <span class="text-sm px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 rounded">
+                    {{ skill.name }}
+                </span>
                 {% endfor %}
             </div>
         </c-card>
@@ -112,7 +106,7 @@
     </div>
 
     <div class="text-center mt-8">
-        <a href="{% url 'core:about' %}#skills" class="text-primary-600 hover:text-primary-700 font-medium">
+        <a href="{% url 'core:about' %}#skills" class="text-cyan-400 hover:text-cyan-300 font-medium">
             See All Skills →
         </a>
     </div>
@@ -130,32 +124,32 @@
                 class="w-full h-48 object-cover rounded-lg mb-4" loading="lazy">
             {% endif %}
 
-            <h3 class="text-xl font-bold mb-2">
-                <a href="{{ project.get_absolute_url }}" class="hover:text-primary-600 transition-colors">
+            <h3 class="text-xl font-bold mb-2 text-white">
+                <a href="{{ project.get_absolute_url }}" class="hover:text-cyan-400 transition-colors">
                     {{ project.title }}
                 </a>
             </h3>
 
-            <p class="text-gray-600 dark:text-gray-400 mb-4">
+            <p class="text-gray-400 mb-4">
                 {{ project.short_description }}
             </p>
 
             <div class="flex flex-wrap gap-2 mb-4">
                 {% for tech in project.get_technologies_list|slice:":4" %}
-                <span class="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 rounded">{{ tech }}</span>
+                <span class="px-2 py-1 text-xs bg-cyan-500/20 border border-cyan-500/30 text-cyan-400 rounded">{{ tech }}</span>
                 {% endfor %}
             </div>
 
             <div class="flex gap-4">
                 {% if project.live_url %}
                 <a href="{{ project.live_url }}" target="_blank"
-                    class="text-primary-600 hover:text-primary-700 font-medium">
+                    class="text-cyan-400 hover:text-cyan-300 font-medium">
                     Live Demo →
                 </a>
                 {% endif %}
                 {% if project.github_url %}
                 <a href="{{ project.github_url }}" target="_blank"
-                    class="text-gray-600 hover:text-gray-700 font-medium">
+                    class="text-gray-400 hover:text-gray-300 font-medium">
                     GitHub →
                 </a>
                 {% endif %}
@@ -165,8 +159,8 @@
     </div>
 
     <div class="text-center mt-8">
-        <a href="{% url 'projects:list' %}" class="px-8 py-3 bg-black border border-cyan-500 text-white font-bold rounded-lg hover:shadow-glow-cyan hover:scale-105 transition-all duration-300 inline-block">
-            View All Projects
+        <a href="{% url 'projects:list' %}" class="text-cyan-400 hover:text-cyan-300 font-medium">
+            View All Projects →
         </a>
     </div>
 </c-section>
@@ -185,8 +179,8 @@
                     class="w-16 h-16 mx-auto mb-4 object-contain">
                 {% else %}
                 <div
-                    class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-primary-100 to-purple-100 dark:from-primary-900 dark:to-purple-900 rounded-full flex items-center justify-center">
-                    <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+                    class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 rounded-full flex items-center justify-center border border-cyan-500/30">
+                    <svg class="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z">
@@ -195,13 +189,13 @@
                 </div>
                 {% endif %}
 
-                <h3 class="font-bold mb-2 text-sm">{{ cert.name }}</h3>
-                <p class="text-xs text-gray-600 dark:text-gray-400 mb-1">{{ cert.issuing_organization }}</p>
-                <p class="text-xs text-gray-500 dark:text-gray-500">{{ cert.date_obtained|date:"M Y" }}</p>
+                <h3 class="font-bold mb-2 text-sm text-white">{{ cert.name }}</h3>
+                <p class="text-xs text-gray-400 mb-1">{{ cert.issuing_organization }}</p>
+                <p class="text-xs text-gray-500">{{ cert.date_obtained|date:"M Y" }}</p>
 
                 {% if cert.credential_url %}
                 <a href="{{ cert.credential_url }}" target="_blank"
-                    class="text-xs text-primary-600 hover:text-primary-700 mt-3 inline-block font-medium">
+                    class="text-xs text-cyan-400 hover:text-cyan-300 mt-3 inline-block font-medium">
                     Verify →
                 </a>
                 {% endif %}
@@ -211,7 +205,7 @@
     </div>
 
     <div class="text-center mt-8">
-        <a href="{% url 'core:about' %}#certifications" class="text-primary-600 hover:text-primary-700 font-medium">
+        <a href="{% url 'core:about' %}#certifications" class="text-cyan-400 hover:text-cyan-300 font-medium">
             View All Certifications →
         </a>
     </div>

@@ -36,7 +36,7 @@ class LandingView(TemplateView):
             
             # Top skills by category (3-4 categories, up to 5 skills each)
             if self._table_exists('core_skill'):
-                skills = Skill.objects.filter(is_active=True).order_by('-proficiency')[:15]
+                skills = Skill.objects.filter(is_active=True).order_by('order', 'name')[:15]
                 context['top_skills_by_category'] = {}
                 for skill in skills:
                     category = skill.get_category_display()
@@ -54,7 +54,7 @@ class LandingView(TemplateView):
             if self._table_exists('education_certification'):
                 context['featured_certifications'] = Certification.objects.filter(
                     is_visible=True
-                ).order_by('-date_obtained')[:4]
+                ).order_by('order', '-date_obtained')[:4]
             else:
                 context['featured_certifications'] = []
                 
