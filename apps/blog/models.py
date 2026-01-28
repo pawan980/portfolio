@@ -24,6 +24,7 @@ class BlogPost(models.Model):
     tags = models.CharField(max_length=200, blank=True, help_text="Comma-separated tags")
     read_time = models.IntegerField(default=5, help_text="Estimated reading time in minutes")
     views = models.IntegerField(default=0, help_text="Number of views")
+    order = models.IntegerField(default=0, help_text="Display order (lower first)")
     
     created_at = models.DateTimeField(auto_now_add=True)
     

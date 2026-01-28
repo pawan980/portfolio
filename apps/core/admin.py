@@ -1,4 +1,5 @@
 from django.contrib import admin
+from adminsortable2.admin import SortableAdminMixin
 from .models import SiteSettings, Skill
 
 
@@ -38,10 +39,10 @@ class SiteSettingsAdmin(admin.ModelAdmin):
 
 
 @admin.register(Skill)
-class SkillAdmin(admin.ModelAdmin):
+class SkillAdmin(SortableAdminMixin, admin.ModelAdmin):
     list_display = ('name', 'category', 'subcategory', 'details', 'order', 'is_active')
     list_filter = ('category', 'subcategory', 'is_active')
-    list_editable = ('order', 'is_active')
+    list_editable = ('is_active',)
     search_fields = ('name', 'subcategory', 'details')
     fieldsets = (
         ('Basic Information', {

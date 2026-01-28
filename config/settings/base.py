@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Third-party apps
     'django_cotton',
     'storages',
+    'adminsortable2',
     
     # Local apps
     'apps.core',

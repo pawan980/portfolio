@@ -118,7 +118,7 @@ class Skill(TimeStampedModel):
     is_active = models.BooleanField(default=True)
     
     class Meta:
-        ordering = ['category', 'subcategory', 'order', 'name']
+        ordering = ['order', 'name']
         verbose_name = "Skill"
         verbose_name_plural = "Skills"
     

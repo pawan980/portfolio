@@ -1,10 +1,11 @@
 from django.contrib import admin
+from adminsortable2.admin import SortableAdminMixin
 from .models import BlogPost
 
 
 @admin.register(BlogPost)
-class BlogPostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'published_date', 'is_published', 'is_featured', 'views')
+class BlogPostAdmin(SortableAdminMixin, admin.ModelAdmin):
+    list_display = ('title', 'author', 'published_date', 'is_published', 'is_featured', 'views', 'order')
     list_filter = ('is_published', 'is_featured', 'published_date', 'created_at')
     search_fields = ('title', 'excerpt', 'content', 'tags')
     list_editable = ('is_published', 'is_featured')
