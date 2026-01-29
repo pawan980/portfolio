@@ -41,7 +41,7 @@ class Education(TimeStampedModel):
     order = models.IntegerField(default=0)
     
     class Meta:
-        ordering = ['-start_date', 'order']
+        ordering = ['order', '-start_date']
         verbose_name_plural = "Education"
     
     def __str__(self):
@@ -66,7 +66,7 @@ class Certification(TimeStampedModel):
     order = models.IntegerField(default=0)
     
     class Meta:
-        ordering = ['-date_obtained', 'order']
+        ordering = ['order', '-date_obtained']
     
     def __str__(self):
         return f"{self.name} - {self.issuing_organization}"

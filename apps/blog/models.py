@@ -29,7 +29,7 @@ class BlogPost(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:
-        ordering = ['-published_date']
+        ordering = ['order', '-published_date']
         verbose_name = 'Blog Post'
         verbose_name_plural = 'Blog Posts'
     

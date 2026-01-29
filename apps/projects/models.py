@@ -45,7 +45,7 @@ class Project(TimeStampedModel):
     end_date = models.DateField(blank=True, null=True)
     
     class Meta:
-        ordering = ['-is_featured', 'order', '-created_at']
+        ordering = ['order', '-is_featured', '-created_at']
     
     def __str__(self):
         return self.title

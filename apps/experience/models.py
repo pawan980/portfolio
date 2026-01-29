@@ -39,7 +39,7 @@ class Experience(TimeStampedModel):
     order = models.IntegerField(default=0)
     
     class Meta:
-        ordering = ['-start_date', 'order']
+        ordering = ['order', '-start_date']
     
     def __str__(self):
         return f"{self.position} at {self.company_name}"
