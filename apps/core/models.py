@@ -117,6 +117,7 @@ class Skill(TimeStampedModel):
     icon = models.CharField(max_length=100, blank=True, help_text="Devicon class (e.g., devicon-python-plain colored)")
     order = models.IntegerField(default=0, help_text="Display order within subcategory")
     is_active = models.BooleanField(default=True)
+    is_featured = models.BooleanField(default=False, help_text="Show on landing page")
     
     class Meta:
         ordering = ['order', 'name']

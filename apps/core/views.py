@@ -34,19 +34,15 @@ class LandingView(TemplateView):
             else:
                 context['featured_projects'] = []
             
-            # Top skills by category (3-4 categories, up to 5 skills each)
+            # Featured skills by category
             if self._table_exists('core_skill'):
-                skills = Skill.objects.filter(is_active=True).order_by('order', 'name')[:15]
+                skills = Skill.objects.filter(is_active=True, is_featured=True).order_by('order', 'name')
                 context['top_skills_by_category'] = {}
                 for skill in skills:
                     category = skill.get_category_display()
                     if category not in context['top_skills_by_category']:
                         context['top_skills_by_category'][category] = []
-                    if len(context['top_skills_by_category'][category]) < 5:
-                        context['top_skills_by_category'][category].append(skill)
-                    # Limit to 4 categories max
-                    if len(context['top_skills_by_category']) >= 4:
-                        break
+                    context['top_skills_by_category'][category].append(skill)
             else:
                 context['top_skills_by_category'] = {}
             

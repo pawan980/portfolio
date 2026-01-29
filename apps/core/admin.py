@@ -40,15 +40,15 @@ class SiteSettingsAdmin(admin.ModelAdmin):
 
 @admin.register(Skill)
 class SkillAdmin(SortableAdminMixin, admin.ModelAdmin):
-    list_display = ('name', 'category', 'subcategory', 'details', 'order', 'is_active')
-    list_filter = ('category', 'subcategory', 'is_active')
-    list_editable = ('is_active',)
+    list_display = ('name', 'category', 'subcategory', 'details', 'order', 'is_active', 'is_featured')
+    list_filter = ('category', 'subcategory', 'is_active', 'is_featured')
+    list_editable = ('is_active', 'is_featured')
     search_fields = ('name', 'subcategory', 'details')
     fieldsets = (
         ('Basic Information', {
             'fields': ('name', 'category', 'subcategory', 'details')
         }),
         ('Display', {
-            'fields': ('icon', 'order', 'is_active')
+            'fields': ('icon', 'order', 'is_active', 'is_featured')
         }),
     )
