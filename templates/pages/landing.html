@@ -174,8 +174,8 @@
         <c-card>
             <div class="text-center">
                 <!-- Badge/Logo if available -->
-                {% if cert.badge_image %}
-                <img src="{{ cert.badge_image.url }}" alt="{{ cert.name }}"
+                {% if cert.organization_logo %}
+                <img src="{{ cert.organization_logo.url }}" alt="{{ cert.name }}"
                     class="w-16 h-16 mx-auto mb-4 object-contain">
                 {% else %}
                 <div
@@ -192,6 +192,9 @@
                 <h3 class="font-bold mb-2 text-sm text-white">{{ cert.name }}</h3>
                 <p class="text-xs text-gray-400 mb-1">{{ cert.issuing_organization }}</p>
                 <p class="text-xs text-gray-500">{{ cert.date_obtained|date:"M Y" }}</p>
+                {% if cert.description %}
+                <p class="text-xs text-gray-400 mt-2 line-clamp-2">{{ cert.description }}</p>
+                {% endif %}
 
                 {% if cert.credential_url %}
                 <a href="{{ cert.credential_url }}" target="_blank"
