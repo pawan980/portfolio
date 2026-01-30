@@ -9,16 +9,6 @@ from apps.core.models import TimeStampedModel
 class Education(TimeStampedModel):
     """Educational background model."""
     
-    DEGREE_CHOICES = [
-        ('phd', 'Ph.D.'),
-        ('masters', 'Master\'s Degree'),
-        ('bachelors', 'Bachelor\'s Degree'),
-        ('associate', 'Associate Degree'),
-        ('diploma', 'Diploma'),
-        ('certificate', 'Certificate'),
-        ('other', 'Other'),
-    ]
-    
     # Institution
     institution = models.CharField(max_length=200)
     institution_logo = models.ImageField(upload_to='education/logos/', blank=True, null=True)
@@ -26,7 +16,7 @@ class Education(TimeStampedModel):
     location = models.CharField(max_length=200, blank=True)
     
     # Degree
-    degree = models.CharField(max_length=20, choices=DEGREE_CHOICES)
+    degree = models.CharField(max_length=200)
     field_of_study = models.CharField(max_length=200)
     grade = models.CharField(max_length=50, blank=True)
     description = models.TextField(blank=True)
@@ -45,7 +35,7 @@ class Education(TimeStampedModel):
         verbose_name_plural = "Education"
     
     def __str__(self):
-        return f"{self.get_degree_display()} in {self.field_of_study} - {self.institution}"
+        return f"{self.degree} in {self.field_of_study} - {self.institution}"
 
 
 class Certification(TimeStampedModel):
