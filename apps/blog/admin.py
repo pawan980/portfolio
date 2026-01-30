@@ -14,13 +14,13 @@ class BlogPostAdmin(SortableAdminMixin, admin.ModelAdmin):
     
     fieldsets = (
         ('Content', {
-            'fields': ('title', 'slug', 'excerpt', 'content', 'cover_image')
+            'fields': ('title', 'slug', 'excerpt', 'content', 'cover_image', 'external_url')
         }),
         ('Metadata', {
             'fields': ('author', 'published_date', 'tags', 'read_time')
         }),
         ('Publishing', {
-            'fields': ('is_published', 'is_featured')
+            'fields': ('is_published', 'is_featured', 'order')
         }),
         ('Stats', {
             'fields': ('views',),
