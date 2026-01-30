@@ -549,49 +549,6 @@
 </section>
 {% endif %}
 
-<!-- Stats/Achievements Section -->
-{% if site.years_experience or site.projects_completed or site.clients_served or site.certifications %}
-<section
-    class="py-20 bg-gradient-to-br from-cyan-600 to-purple-600 text-white">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold mb-4 text-white" style="font-family: 'Sora', sans-serif;">Achievements</h2>
-            <p class="text-xl text-cyan-100">Numbers that showcase my experience</p>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {% if site.years_experience %}
-            <div class="text-center">
-                <div class="text-5xl md:text-6xl font-bold mb-2 text-white" data-count="{{ site.years_experience }}">0</div>
-                <div class="text-lg text-cyan-100">Years Experience</div>
-            </div>
-            {% endif %}
-
-            {% if site.projects_completed %}
-            <div class="text-center">
-                <div class="text-5xl md:text-6xl font-bold mb-2 text-white" data-count="{{ site.projects_completed }}">0</div>
-                <div class="text-lg text-cyan-100">Projects Completed</div>
-            </div>
-            {% endif %}
-
-            {% if site.clients_served %}
-            <div class="text-center">
-                <div class="text-5xl md:text-6xl font-bold mb-2 text-white" data-count="{{ site.clients_served }}">0</div>
-                <div class="text-lg text-cyan-100">Happy Clients</div>
-            </div>
-            {% endif %}
-
-            {% if site.certifications %}
-            <div class="text-center">
-                <div class="text-5xl md:text-6xl font-bold mb-2 text-white" data-count="{{ site.certifications }}">0</div>
-                <div class="text-lg text-cyan-100">Certifications</div>
-            </div>
-            {% endif %}
-        </div>
-    </div>
-</section>
-{% endif %}
-
 <!-- Testimonials Section -->
 {% if testimonials %}
 <c-section title="Client Testimonials" subtitle="What people say about working with me">
