@@ -12,6 +12,7 @@ class BlogPost(models.Model):
     content = models.TextField(help_text="Full blog post content (supports Markdown)")
     cover_image = models.ImageField(upload_to='blog/', blank=True, null=True, help_text="Featured image")
     external_url = models.URLField(blank=True, help_text="Link to externally published blog (e.g., Medium, Dev.to)")
+    platform_name = models.CharField(max_length=50, blank=True, help_text="Platform name for external link (e.g., Medium, Dev.to)")
     
     # Metadata
     author = models.CharField(max_length=100, default="Pawan Kumar")

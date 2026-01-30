@@ -14,7 +14,7 @@ class BlogPostAdmin(SortableAdminMixin, admin.ModelAdmin):
     
     fieldsets = (
         ('Content', {
-            'fields': ('title', 'slug', 'excerpt', 'content', 'cover_image', 'external_url')
+            'fields': ('title', 'slug', 'excerpt', 'content', 'cover_image', 'external_url', 'platform_name')
         }),
         ('Metadata', {
             'fields': ('author', 'published_date', 'tags', 'read_time')
