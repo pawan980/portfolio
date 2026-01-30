@@ -8,8 +8,10 @@ class Testimonial(models.Model):
     company = models.CharField(max_length=100, help_text="Company name")
     content = models.TextField(help_text="Testimonial text")
     photo = models.ImageField(upload_to='testimonials/', blank=True, null=True, help_text="Author photo")
+    linkedin_url = models.URLField(blank=True, help_text="LinkedIn profile URL for verification")
     rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)], default=5, help_text="Rating out of 5")
     is_featured = models.BooleanField(default=False, help_text="Show on homepage")
+    is_approved = models.BooleanField(default=False, help_text="Approve to display publicly")
     order = models.IntegerField(default=0, help_text="Display order (lower first)")
     created_at = models.DateTimeField(auto_now_add=True)
     

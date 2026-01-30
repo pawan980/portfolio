@@ -166,10 +166,10 @@ class AboutView(TemplateView):
             else:
                 context['certifications'] = []
             
-            # All testimonials
+            # Approved testimonials
             if self._table_exists('testimonials_testimonial'):
                 from apps.testimonials.models import Testimonial
-                context['testimonials'] = Testimonial.objects.all()
+                context['testimonials'] = Testimonial.objects.filter(is_approved=True).order_by('order', '-created_at')
             else:
                 context['testimonials'] = []
             
