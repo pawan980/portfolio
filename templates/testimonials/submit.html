@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Submit a Testimonial - {{ site.name }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Force input text to be white/light for better visibility */
+    form input[type="text"],
+    form input[type="url"],
+    form input[type="email"],
+    form textarea,
+    form select {
+        color: #e0f2fe !important; /* cyan-100 */
+    }
+    
+    /* File input text color */
+    form input[type="file"] {
+        color: #e0f2fe !important;
+    }
+    
+    /* Placeholder styling */
+    form input::placeholder,
+    form textarea::placeholder {
+        color: #6b7280 !important; /* gray-500 */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Submit Testimonial Page -->
+<section class="min-h-screen py-20 bg-gradient-to-b from-black via-gray-900 to-black relative overflow-hidden">
+    <!-- Background effects -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full filter blur-3xl"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full filter blur-3xl"></div>
+    </div>
+
+    <div class="max-w-3xl mx-auto px-4 relative z-10">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 text-white" style="font-family: 'Sora', sans-serif;">
+                Submit a <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Testimonial</span>
+            </h1>
+            <p class="text-xl text-gray-400">Share your experience working with me</p>
+        </div>
+
+        <!-- Success/Error Messages -->
+        {% if messages %}
+        <div class="mb-8">
+            {% for message in messages %}
+            <div class="p-4 rounded-lg border {% if message.tags == 'success' %}bg-green-900/50 border-green-500/30 text-green-400{% else %}bg-red-900/50 border-red-500/30 text-red-400{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Form -->
+        <div class="bg-gradient-to-b from-gray-900/90 to-black/90 border border-cyan-500/20 rounded-xl p-8 shadow-2xl">
+            <form method="post" enctype="multipart/form-data" class="space-y-6 testimonial-form">
+                {% csrf_token %}
+
+                <!-- Author Name -->
+                <div>
+                    <label class="block text-cyan-400 font-semibold mb-2">{{ form.author.label }} *</label>
+                    {{ form.author }}
+                    {% if form.author.errors %}
+                    <p class="text-red-400 text-sm mt-1">{{ form.author.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Position -->
+                <div>
+                    <label class="block text-cyan-400 font-semibold mb-2">{{ form.position.label }} *</label>
+                    {{ form.position }}
+                    {% if form.position.errors %}
+                    <p class="text-red-400 text-sm mt-1">{{ form.position.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Company -->
+                <div>
+                    <label class="block text-cyan-400 font-semibold mb-2">{{ form.company.label }} *</label>
+                    {{ form.company }}
+                    {% if form.company.errors %}
+                    <p class="text-red-400 text-sm mt-1">{{ form.company.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- LinkedIn URL -->
+                <div>
+                    <label class="block text-cyan-400 font-semibold mb-2">{{ form.linkedin_url.label }}</label>
+                    {{ form.linkedin_url }}
+                    <p class="text-gray-500 text-sm mt-1">{{ form.linkedin_url.help_text }}</p>
+                    {% if form.linkedin_url.errors %}
+                    <p class="text-red-400 text-sm mt-1">{{ form.linkedin_url.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Rating -->
+                <div>
+                    <label class="block text-cyan-400 font-semibold mb-2">{{ form.rating.label }} *</label>
+                    {{ form.rating }}
+                    {% if form.rating.errors %}
+                    <p class="text-red-400 text-sm mt-1">{{ form.rating.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Testimonial Content -->
+                <div>
+                    <label class="block text-cyan-400 font-semibold mb-2">{{ form.content.label }} *</label>
+                    {{ form.content }}
+                    <p class="text-gray-500 text-sm mt-1">{{ form.content.help_text }}</p>
+                    {% if form.content.errors %}
+                    <p class="text-red-400 text-sm mt-1">{{ form.content.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Photo Upload -->
+                <div>
+                    <label class="block text-cyan-400 font-semibold mb-2">{{ form.photo.label }}</label>
+                    {{ form.photo }}
+                    <p class="text-gray-500 text-sm mt-1">{{ form.photo.help_text }}</p>
+                    {% if form.photo.errors %}
+                    <p class="text-red-400 text-sm mt-1">{{ form.photo.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Privacy Notice -->
+                <div class="p-4 bg-purple-900/20 border border-purple-500/30 rounded-lg">
+                    <p class="text-sm text-gray-300">
+                        <svg class="w-5 h-5 inline-block mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Your testimonial will be reviewed before being published. We respect your privacy and will only use the information provided to display your testimonial on our website.
+                    </p>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex gap-4">
+                    <button type="submit" 
+                        class="flex-1 px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-bold rounded-lg hover:shadow-glow-mixed transition-all duration-300 transform hover:scale-105">
+                        Submit Testimonial
+                    </button>
+                    <a href="{% url 'core:about' %}#testimonials" 
+                        class="px-8 py-4 bg-gray-800 border border-gray-700 text-white font-bold rounded-lg hover:border-cyan-500/50 transition-all duration-300">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="mt-8 text-center text-gray-400 text-sm">
+            <p>Fields marked with * are required</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
