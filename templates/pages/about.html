@@ -424,7 +424,7 @@
                         </div>
                     </div>
 
-                    <p class="text-gray-300 mb-4 leading-relaxed">{{ exp.description }}</p>
+                    <div class="text-gray-300 mb-4 leading-relaxed">{{ exp.get_description_as_html|safe }}</div>
 
                     {% if exp.technologies %}
                     <div class="flex flex-wrap gap-2">

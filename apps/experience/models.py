@@ -46,3 +46,34 @@ class Experience(TimeStampedModel):
     
     def get_technologies_list(self):
         return [tech.strip() for tech in self.technologies.split(',') if tech.strip()]
+    
+    def get_description_as_html(self):
+        """Convert description with bullet points to HTML."""
+        lines = self.description.strip().split('\n')
+        html_parts = []
+        in_list = False
+        
+        for line in lines:
+            line = line.strip()
+            if not line:
+                if in_list:
+                    html_parts.append('</ul>')
+                    in_list = False
+                continue
+            
+            # Check if line starts with bullet point marker
+            if line.startswith('* ') or line.startswith('- '):
+                if not in_list:
+                    html_parts.append('<ul class="list-disc list-inside space-y-2 text-gray-300">')
+                    in_list = True
+                html_parts.append(f'<li>{line[2:]}</li>')
+            else:
+                if in_list:
+                    html_parts.append('</ul>')
+                    in_list = False
+                html_parts.append(f'<p>{line}</p>')
+        
+        if in_list:
+            html_parts.append('</ul>')
+        
+        return ''.join(html_parts)

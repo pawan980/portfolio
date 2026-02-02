@@ -15,7 +15,8 @@ class ExperienceAdmin(SortableAdminMixin, admin.ModelAdmin):
             'fields': ('company_name', 'company_logo', 'company_url', 'location')
         }),
         ('Position', {
-            'fields': ('position', 'employment_type', 'description', 'technologies')
+            'fields': ('position', 'employment_type', 'description', 'technologies'),
+            'description': 'For bullet points in description, start each line with "* " or "- "'
         }),
         ('Dates', {
             'fields': ('start_date', 'end_date', 'is_current')
