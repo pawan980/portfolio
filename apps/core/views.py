@@ -26,11 +26,11 @@ class LandingView(TemplateView):
         context = super().get_context_data(**kwargs)
         
         try:
-            # Featured projects (top 4)
+            # Featured projects (projects marked to show on about page, top 4)
             if self._table_exists('projects_project'):
                 context['featured_projects'] = Project.objects.filter(
-                    is_published=True, is_featured=True
-                ).order_by('-created_at')[:4]
+                    show_on_about_page=True
+                ).order_by('order', '-created_at')[:4]
             else:
                 context['featured_projects'] = []
             
@@ -136,11 +136,11 @@ class AboutView(TemplateView):
             else:
                 context['skills_categories'] = []
             
-            # All projects
+            # Projects marked to show on about page
             if self._table_exists('projects_project'):
                 context['projects'] = Project.objects.filter(
-                    is_published=True
-                ).order_by('-created_at')
+                    show_on_about_page=True
+                ).order_by('order', '-created_at')
             else:
                 context['projects'] = []
             

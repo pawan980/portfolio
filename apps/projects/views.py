@@ -25,7 +25,22 @@ class ProjectListView(ListView):
     def get_queryset(self):
         if not self._table_exists('projects_project'):
             return Project.objects.none()
-        return Project.objects.filter(is_published=True)
+        
+        queryset = Project.objects.all()
+        
+        # Filter by category if provided
+        category = self.request.GET.get('category')
+        if category and category != 'all':
+            # Filter projects that have this category in their categories field
+            queryset = queryset.filter(categories__icontains=category)
+        
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['selected_category'] = self.request.GET.get('category', 'all')
+        context['categories'] = Project.CATEGORY_CHOICES
+        return context
 
 
 class ProjectDetailView(DetailView):
@@ -35,4 +50,4 @@ class ProjectDetailView(DetailView):
     context_object_name = 'project'
     
     def get_queryset(self):
-        return Project.objects.filter(is_published=True)
+        return Project.objects.all()
