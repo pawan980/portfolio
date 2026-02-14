@@ -18,6 +18,17 @@ A cyberpunk-themed digital showcase of my work and professional journey with mod
 - **Tag System**: Categorize posts with tags
 - **Read Time**: Automatic read time calculation
 
+### 💬 Testimonials
+- **Client Testimonials**: Responsive carousel with star ratings
+- **LinkedIn Integration**: Direct links to testimonial authors
+- **Public Submission**: Allow clients to submit testimonials via form
+- **Smart Display**: Shows 1-3 testimonials per page based on screen size
+
+### 📊 Analytics
+- **Page View Tracking**: Monitor visitor engagement
+- **Project Click Analytics**: Track project interest
+- **Contact Form Submissions**: Log inquiry patterns
+
 ### 🎨 Design System
 - **Cyberpunk Theme**: Gradient animations, neon effects, glass morphism
 - **Responsive**: Mobile-first design with Tailwind CSS
@@ -27,8 +38,11 @@ A cyberpunk-themed digital showcase of my work and professional journey with mod
 ## 🚀 Tech Stack
 
 - **Backend**: Django 4.2.27
-- **Styling**: Tailwind CSS 3.4.1
-- **Interactivity**: Alpine.js 3.14+
+- **Components**: django-cotton 2.5.0 for reusable template components
+- **Styling**: Tailwind CSS 3.4.1 with @tailwindcss/typography
+- **Interactivity**: Alpine.js 3.14.1
+- **Static Files**: WhiteNoise 6.8.2
+- **Storage**: django-storages with AWS S3 support (boto3)
 - **Database**: SQLite (dev) / PostgreSQL (prod)
 - **Admin**: django-admin-sortable2 for drag & drop ordering
 
@@ -66,8 +80,15 @@ npm install
 
 5. **Setup environment variables:**
 ```bash
-cp .env.example .env
-# Edit .env with your settings
+# Create .env file in project root
+touch .env
+```
+
+Add the following to your `.env` file:
+```env
+DEBUG=True
+SECRET_KEY=your-secret-key-here
+ALLOWED_HOSTS=localhost,127.0.0.1
 ```
 
 6. **Run migrations:**
@@ -144,6 +165,47 @@ npm run watch:css
 3. Add **Education & Certifications**
 4. Use drag handles to reorder items
 
+## 🧩 Component System
+
+This project uses **django-cotton** for reusable template components with a clean, prop-based API.
+
+### Available Components
+
+- **`<c-section>`**: Page sections with title and subtitle
+  ```html
+  <c-section title="My Section" subtitle="Description">
+    <!-- content -->
+  </c-section>
+  ```
+
+- **`<c-card>`**: Styled content cards with cyberpunk theme
+  ```html
+  <c-card>
+    <!-- card content -->
+  </c-card>
+  ```
+
+- **`<c-social-icon>`**: Social media icons with hover effects
+  ```html
+  <c-social-icon platform="github" url="https://github.com/username" size="w-8 h-8" />
+  ```
+
+- **`<c-lazy-image>`**: Lazy-loaded images with loading states
+- **`<c-share-buttons>`**: Social sharing buttons for blog posts
+
+### Creating Custom Components
+
+1. Create a new file in `templates/cotton/`
+2. Add `<c-vars>` to declare props:
+   ```html
+   <c-vars 
+     title="{{ title|default:'' }}"
+     subtitle="{{ subtitle|default:'' }}"
+   />
+   ```
+3. Use props in your template
+4. Access with `<c-component-name>` syntax
+
 ## 🎨 Customization
 
 ### Change Theme Colors
@@ -176,37 +238,37 @@ To change:
 
 ### Project Categories
 
-To add/modify categories, edit `apps/projects/models.py`:
-```python
-CATEGORY_CHOICES = [
-    ('your_key', 'Display Name'),
-    # Add more categories
-]
-```
+Project categories are stored in the database. To modify:
 
-Then run:
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
+1. Login to admin panel
+2. Navigate to **Projects**
+3. Edit the **categories** field (comma-separated values)
+4. Available categories: `web_apps`, `backend`, `ai_agents`, `open_source`, `data_engineering`
+
+To add new categories, update the filtering logic in `apps/projects/views.py`.
 
 ## 📁 Project Structure
 
 ```
 portfolio/
 ├── apps/
-│   ├── core/          # Base models & utilities
+│   ├── core/          # Base models & site settings
 │   ├── projects/      # Project showcase (with categories, filtering)
-│   ├── blog/          # Blog posts
-│   ├── skills/        # Skills display
-│   └── experience/    # Work & education
-├── config/            # Django settings
-├── static/           # CSS, JS, images
-├── templates/        # HTML templates
+│   ├── blog/          # Blog posts and articles
+│   ├── experience/    # Work experience
+│   ├── education/     # Education & certifications
+│   ├── contact/       # Contact form
+│   ├── testimonials/  # Client testimonials
+│   └── analytics/     # Page view tracking
+├── config/            # Django settings (split: base, dev, prod)
+├── static/            # CSS, JS, images
+│   ├── src/          # Tailwind source files
+│   └── css/          # Compiled CSS
+├── templates/         # HTML templates
 │   ├── base.html     # Base template
-│   ├── components/   # Reusable components
+│   ├── cotton/       # Django-cotton components
 │   └── pages/        # Page templates
-└── requirements/     # Python dependencies
+└── requirements/      # Python dependencies (base, dev, prod)
 ```
 
 ## 🔧 Development

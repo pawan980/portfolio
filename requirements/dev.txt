@@ -1,5 +1,14 @@
+# Include all base requirements
 -r base.txt
+
+# Database URL parsing for development
 dj-database-url==2.1.0
+
+# WSGI HTTP server for local development
 gunicorn==23.0.0
+
+# Debug toolbar for Django development
 django-debug-toolbar==4.4.6
+
+# Additional management commands and utilities
 django-extensions==3.2.3

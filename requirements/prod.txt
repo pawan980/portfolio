@@ -1,3 +1,8 @@
+# Include all base requirements
 -r base.txt
+
+# Database URL parsing for production (Render, Heroku, etc.)
 dj-database-url==2.1.0
+
+# Production WSGI HTTP server
 gunicorn==23.0.0

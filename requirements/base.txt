@@ -1,10 +1,27 @@
+# Core Django framework
 Django==4.2.27
+
+# Environment variable management
 django-environ==0.11.2
+
+# Reusable template components with props
 django-cotton==2.5.0
+
+# Drag & drop ordering in admin
 django-admin-sortable2==2.2.3
+
+# Image processing (thumbnails, resizing)
 Pillow==11.0.0
+
+# PostgreSQL database adapter
 psycopg2-binary==2.9.10
+
+# Static file serving in production
 whitenoise==6.8.2
+
+# AWS S3 storage backend
 django-storages==1.14.2
 boto3==1.34.30
+
+# Markdown rendering for blog posts
 markdown==3.9
